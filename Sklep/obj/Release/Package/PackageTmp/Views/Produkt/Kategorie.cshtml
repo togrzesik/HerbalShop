@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Sklep.Models.ViewModel.CategoryView>
+@{
+    ViewBag.Title = "kate";
+}
+<ul class="list-unstyled productsFromCategory_listCategory_list">
+    <li class="productsFromCategory_listCategory_list_title">
+        Kategorie
+    </li>
+    @foreach (var item in Model)
+    {
+        <li class="">
+            <a href='@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = @item.CategoryID })' class="productsFromCategory_listCategory_list_link">
+                @item.Name
+            </a>
+            <!--
+                
+              <ul class="list-unstyled productsFromCategory_listCategory_list_subcategory">
+                            <li class="">
+                                <a href="#" class="productsFromCategory_listCategory_list_link">
+                                    Laptopy
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="productsFromCategory_listCategory_list_link">
+                                    Karty graficzne
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#" class="productsFromCategory_listCategory_list_link">
+                                    Procesory
+                                </a>
+                            </li>
+                        </ul>
+                -->
+            </li>
+        
+        }
+    </ul>

@@ -1,0 +1,192 @@
+﻿@model PagedList.IPagedList<Sklep.Models.ViewModel.ProductCategoryView>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Kategoria";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Produkty</title>
+@{ if (ViewBag.Ilosc == 0)
+    {
+        <div id="containerProductsFromCategory" class="container container--productsFromCategory">
+            <div class="container_emptyProductsFromCategory">
+                <p class="emptyShoppingCart_text">Brak produktów o wybranych parametrach</p>
+                @Html.Action("ProductsBestseller", "Home")
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="containerProductsFromCategory" class="container container--productsFromCategory">
+            <div class="row">
+                <div class="col-md-3 productsFromCategory_listCategory">
+                    <div class="">
+                        @Html.Partial("Kategorie", ViewData["categories"])
+                        <hr>
+
+                        <p>
+                            <label class="productsFromCategory_titlePrice_text" for="amount">Cena:</label>
+                            <input type="text" id="amount" readonly class="productsFromCategory_price_text">
+                        </p>
+
+                        <div id="slider-range" class="productsFromCategory_price_slider"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-7 offset--lg-1 productsFromCategory_containerButton">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  productsFromCategory_containerButton_button productsFromCategory_containerButton_button--clean"
+                                    id="deleteFilterButton" type="submit">
+                                Wyczyść filtr
+                            </button>
+                        </div>
+                        <div class="col-lg-5 productsFromCategory_containerButton">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  productsFromCategory_containerButton_button productsFromCategory_containerButton_button--filter"
+                                    id="filterButton" type="submit">
+                                Filtruj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 offset-md-1 productsFromCategory_productsList">
+                    <div class="row productsFromCategory_productsList_sorting">
+                        <div class="col-5 col-md-5 col-lg-4 col-xl-3 offset-md-7 offset-lg-8 offset-6">
+                            @Html.DropDownList(
+              "url",
+              new SelectList(new[]
+              {
+                                                new SelectListItem { Text = "Nazwa A-Z", Value = Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = ViewBag.categoryID, sortV = "0", minV = ViewBag.min, maxV = ViewBag.max }) },
+                                                new SelectListItem { Text = "Nazwa Z-A", Value = Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = ViewBag.categoryID, sortV = "1", minV = ViewBag.min, maxV = ViewBag.max }) },
+                                                new SelectListItem { Text = "Cena rosnąco", Value = Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = ViewBag.categoryID, sortV = "2", minV = ViewBag.min, maxV = ViewBag.max}) },
+                                                new SelectListItem { Text = "Cena malejąco", Value = Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = ViewBag.categoryID, sortV = "3" , minV = ViewBag.min, maxV = ViewBag.max}) },
+              }, "Value", "Text"),
+                "Wybierz",
+              new { id = "urlddl", @class = "form-control" }
+           )
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-12 productsFromCategory_productsList_product">
+                                <div class="productsFromCategory_productsList_product_title">
+                                    <a href='@Url.Action("SzczegolyProduktu", "Produkt", new { productID = @item.ProductID })'>@item.Name</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <img src="@Url.Content(item.ImagePath)" class="img-responsive" style="width:100%" alt="Produkt">
+                                    </div>
+                                    <div class="col-4 productsFromCategory_productsList_product_specification">
+                                        @{
+                                            int counter = 0;
+                                            foreach (var spec in item.specJ)
+                                            {
+                                                <div class="row">
+                                                    @spec.Key : @spec.Value
+                                                </div>
+                                                counter++;
+                                                if (counter > 3)
+                                                {
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                    <div class="col-5 productsFromCategory_productsList_product_containerPrices">
+                                        @if (item.OldPriceB != null)
+                                        {
+                                            <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                                Cena (netto) :
+                                                <span class="productsFromCategory_productsList_product_containerPrices_priceNetto">
+                                                    @item.PriceN
+                                                </span>
+                                            </div>
+                                            <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                                Cena (brutto) :
+                                                <strike class="productsFromCategory_productsList_product_containerPrices_priceOld">@item.OldPriceB </strike>
+                                            </div>
+                                            <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                                <div class="productsFromCategory_productsList_product_containerPrices_priceBrutto">
+                                                    @item.PriceB
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                         <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                            Cena (netto) :
+                                            <span class="productsFromCategory_productsList_product_containerPrices_priceNetto">
+                                                @item.PriceN
+                                            </span>
+                                             <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                                 Cena (brutto) :
+                                                 <div class="productsFromCategory_productsList_product_containerPrices_priceOld">@item.PriceB</div>
+                                             </div>
+                                        </div>
+
+                                        }
+
+                                        <div class="row productsFromCategory_productsList_product_containerPrices_title">
+                                            <input id="Button_add_to_cart" type="button" value="Dodaj do koszyka" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  productsFromCategory_productsList_product_containerPrices__button"
+                                                   onclick="location.href='@Url.Action("DodajDoKoszyka", "Koszyk", new { ProductID = item.ProductID })'" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         }
+                  
+                    </div>
+                    <div class="row productsFromCategory_paggination">
+                        <div class="mx-auto">
+                            @Html.PagedListPager(Model, page => Url.Action("ProduktyZKategorii", new { page, categoryID = ViewBag.categoryID, minV = ViewBag.min, maxV = ViewBag.max, sortV = ViewBag.sortV }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+<script>
+                $(function () {
+                    $('#urlddl').change(function () {
+                        var url = $(this).val();
+                        if (url != null && url != '') {
+                            window.location.href = url;
+                        }
+                    });
+
+
+                    var minPrice = "@ViewBag.min";
+                    var maxPrice = "@ViewBag.max";
+                    $("#slider-range").slider({
+                        range: true,
+                        min: 0,
+                        max: maxPrice,
+                        values: [minPrice, maxPrice],
+                        slide: function (event, ui) {
+                            $("#amount").val(ui.values[0] + "zł" + " - " + ui.values[1] + "zł");
+                        }
+                    });
+                    $("#amount").val($("#slider-range").slider("values", 0) +
+                        "zł - " + $("#slider-range").slider("values", 1) + "zł");
+
+
+                    $("#filterButton").click(function () {
+                        var min = $('#slider-range').slider("values")[0];
+                        var max = $('#slider-range').slider("values")[1];
+                        var category = '@ViewBag.categoryID';
+                        window.location.href = "/Produkt/ProduktyZKategorii?categoryID=" + category + "&sortV=0&minV=" + min + "&maxV=" + max;
+                        return;
+
+                    });
+                    $("#deleteFilterButton").click(function () {
+                        var category = '@ViewBag.categoryID';
+                        window.location.href = "/Produkt/ProduktyZKategorii?categoryID=" + category + "&sortV=0";
+                        return;
+                    });
+
+                });
+</script>
+
+

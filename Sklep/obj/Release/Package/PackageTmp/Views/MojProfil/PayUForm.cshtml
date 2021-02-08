@@ -1,0 +1,32 @@
+﻿@model Sklep.Models.ViewModel.PayUForm
+
+
+<form method="POST" action="https://secure.payu.com/api/v2_1/orders">
+    <input type="hidden" name="customerIp" value="@Model.PayUConfiguration["customerIp"]">
+    <input type="hidden" name="merchantPosId" value="@Model.PayUConfiguration["merchantPosId"]">
+    <input type="hidden" name="description" value="@Model.PayUConfiguration["description"]">
+    <input type="hidden" name="totalAmount" value="@Model.PayUConfiguration["totalAmount"]">
+    <input type="hidden" name="currencyCode" value="@Model.PayUConfiguration["currencyCode"]">
+
+
+    @{
+        int i = 0;
+        foreach (var item in Model.listProduct)
+        {
+            <input type="hidden" name="products[@i].name" value="@Model.PayUConfiguration["products["+i+"].name"]">
+            <input type="hidden" name="products[@i].unitPrice" value="@Model.PayUConfiguration["products["+i+"].unitPrice"]">
+            <input type="hidden" name="products[@i].quantity" value="@Model.PayUConfiguration["products["+i+"].quantity"]">
+            i++;
+        }
+    }
+    <input type="hidden" name="notifyUrl" value="@Model.PayUConfiguration["notifyUrl"]">
+    <input type="hidden" name="continueUrl" value="@Model.PayUConfiguration["continueUrl"]">
+    <input type="hidden" name="OpenPayu-Signature" type="hidden" value="@Model.PayUConfiguration["Signature"]">
+    
+    <button type="submit" formtarget="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_detailsOrder_footer_button myProfile_detailsOrder_footer_button--payU">
+
+        <img src="~/Images/Logo/payu.jpg" />
+    
+    </button>
+</form>
+ 

@@ -1,0 +1,664 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <link href="~/CSS/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/CSS/material.css">
+    <script src="~/Scripts/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/jquery.dataTables.js"></script>
+    <link href="~/CSS/base.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container container--header">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <div class="row">
+                    <div class="col-md-2 col-lg-2">
+                        <a href="@Url.Action("KosztyDostawy", "Home")" class="header_link">Dostawa</a>
+                    </div>
+                    <div class="col-md-11 col-lg-10">
+                        <a href="@Url.Action("Kontakt", "Home")" class="header_link">Kontakt</a> 601 601 601
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-0 col-lg-4 offset-lg-2 header_linkRight">
+                @{ if (User.Identity.Name == "")
+                    {
+                        <a href="#" class="header_link header_linkRight header_link--SignIn" data-toggle="modal" data-target="#modalSignIn">Zaloguj się</a>
+                        <a href="#" class="header_link" data-toggle="modal" data-target="#modalRegistration">Zarejestruj się</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Index", "MojProfil")" class="header_link header_linkRight header_link--SignIn">Mój profil</a>
+                        {
+                            if (ViewBag.IsAdmin == "True")
+                            {
+                                <a href="@Url.Action("Index", "Admin")" class="header_link">Admin</a>
+                            }
+                        }
+                        <a href="@Url.Action("Wylogowanie", "Logowanie")" class="header_link">Wyloguj się</a>
+                    }
+
+                }
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div class="container container--navbar sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand offset-lg-1 col-lg-1" href="@Url.Action("Index", "Home")">Sklep</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggles"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                @using (Html.BeginForm("Szukaj", "Produkt", FormMethod.Post, new { @class = "form-inline mx-auto navbar_form" }))
+                {
+                    <div class="mdl-textfield mdl-js-textfield offset-sm-2 col-lg-7  ">
+                        <input type="text" class="mdl-textfield__input" id="searchProduct" name="searchProduct" placeholder="Wyszukaj produkt">
+                        <label class="mdl-textfield__label" for="searchProduct"></label>
+                    </div>
+                    <select class="dropdown form-control col-sm-3" form-control id="categorySelected" name="kategoria">
+                        <option class="dropdown-item" value="">Wszędzie</option>
+                        <option class="dropdown-item" value="1">Komputery</option>
+                        <option class="dropdown-item" value="2">Podzespoły PC</option>
+                        <option class="dropdown-item" value="3">Oprogramowanie</option>
+                        <option class="dropdown-item" value="4">Akcesoria</option>
+                    </select>
+                        <button class="form-control mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  navbar_form_button"
+                           type="submit">
+                           Szukaj
+                        </button>
+                }
+
+                <a class="col-lg-1 navbar_form_icon" href="@Url.Action("Index", "Koszyk")">
+                    <img src="~/Images/shopping-cart.svg" id="iconShoppingCart" />
+                    <span class="badge badge-secondary" id="countShoppingCart">@ViewBag.IloscSztuk</span>
+                </a>
+                <div class="col-lg-1"></div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container container--categories">
+        <div class="row categories">
+            <div class="categories_dropdown col-lg-2 offset-lg-2 col-sm-12">
+                Komputery
+                <div class="container">
+                    <div class="categories_dropdown_content col-lg-14">
+                        <div class="categories_dropdown_content_header"> Komputery</div>
+                        <div class="row">
+                            <div class="column col-lg-4">
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 5 })">
+                                        Laptopy
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 10 })">
+                                        Komputery stacjonarne
+                                    </a>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div href="#" class="categories_dropdown col-lg-2 col-sm-12 ">
+                Podzespoły PC
+                <div class="container">
+                    <div class="categories_dropdown_content col-lg-14">
+                        <div class="categories_dropdown_content_header">Podzespoły PC</div>
+                        <div class="row">
+                            <div class="column col-lg-4">
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 7 })">
+                                        Karty graficzne
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 6 })">
+                                        Procesory
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 9 })">
+                                        Pamięci RAM
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 19 })">
+                                        Płyty główne
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="column col-lg-4">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div href="#" class="categories_dropdown col-lg-2 col-sm-12 ">
+                Oprogramowanie
+                <div class="container">
+                    <div class="categories_dropdown_content col-lg-14">
+                        <div class="categories_dropdown_content_header">Oprogramowanie</div>
+                        <div class="row">
+                            <div class="column col-lg-4">
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 11 })">
+                                        Systemy operacyjne
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 12 })">
+                                        Programy antywirusowe
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 13 })">
+                                        Programy biurowe
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="column col-lg-4">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div href="#" class="categories_dropdown col-lg-2 col-sm-12 ">
+                Akcesoria
+                <div class="container">
+                    <div class="categories_dropdown_content col-lg-14">
+                        <div class="categories_dropdown_content_header">Akcesoria</div>
+                        <div class="row">
+                            <div class="column col-lg-4">
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 14 })">
+                                        Myszki
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 15 })">
+                                        Klawiatury
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 8 })">
+                                        Monitory
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 16 })">
+                                        Słuchawki
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="column col-lg-4">
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 17 })">
+                                        Głośniki
+                                    </a>
+                                </div>
+                                <div class="col-lg-10 offset-lg-2 categories_dropdown_content_subCategory">
+                                    <a href="@Url.Action("ProduktyZKategorii", "Produkt", new { categoryID = 18 })">
+                                        Dyski przenośne
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @RenderBody()
+
+
+    <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer__middle-section">
+            <div class="container">
+                <div class="row" id="footer">
+                    <div class="mdl-mega-footer__drop-down-section col-md-2">
+                        <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                        <div class="footer_title mdl-mega-footer__heading">Informacje</div>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li>
+                                <a href="@Url.Action("Regulamin", "Home")" class="footer_link">Regulamin</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("KosztyDostawy", "Home")" class="footer_link">Koszty dostawy</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mdl-mega-footer__drop-down-section col-md-2">
+                        <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                        <div class="footer_title mdl-mega-footer__heading">Kontakt</div>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li>
+                                <a href="@Url.Action("Kontakt", "Home")" class="footer_link">Napisz do nas</a>
+                            </li>
+                            <li>Zadzwoń</li>
+                            <li>&nbsp601 601 601</li>
+                            <li>pon-sob: &nbsp8:00-20:00</li>
+                            <li>niedziela: 10:00-18:00</li>
+                        </ul>
+                    </div>
+
+
+                    <div class="mdl-mega-footer__drop-down-section col-md-2">
+                        <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                        <div class="footer_title mdl-mega-footer__heading">Płatność</div>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li class="row">
+                                <div class="col-md-10">
+                                    <img class="img-responsive imgLogo imgLogoPayment" src="~/Images/Logo/pp_cc_mark_111x69.jpg" style="width:100%" alt="logo">
+                                </div>
+                            </li>
+                            <li class="row">
+                                <div class="col-md-10">
+                                    <img class="img-responsive imgLogo imgLogoPayment" src="~/Images/Logo/payuL.png" style="width:100%" alt="logo">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="mdl-mega-footer__drop-down-section col-md-5">
+                        <input class="mdl-mega-footer__heading-checkbox" type="checkbox" checked>
+                        <div class="footer_title mdl-mega-footer__heading">Strefa marek</div>
+                        <ul class="mdl-mega-footer__link-list">
+                            <li class="row">
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/1.jpg" style="width:100%" alt="logo">
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/2.jpg" style="width:100%" alt="logo">
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/3.jpg" style="width:100%" alt="logo">
+                                </div>
+                            </li>
+                            <li class="row">
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/3.jpg" style="width:100%" alt="logo">
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/1.jpg" style="width:100%" alt="logo">
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="img-responsive imgLogo" src="~/Images/Logo/2.jpg" style="width:100%" alt="logo">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal logowanie -->
+    <div class="modal fade" id="modalSignIn" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title modal_title" id="titleModal">LOGOWANIE</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <p class="mx-auto" id="contentModal"></p>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title">Login:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6  form-inline">
+                            <input class="mdl-textfield__input modal_input" placeholder="Login" type="text" id="signINLogin">
+                            <label class="mdl-textfield__label modal_label--underline" for="signINLogin">Login</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title">Hasło:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6  form-inline">
+                            <input class="mdl-textfield__input modal_input" placeholder="Hasło" type="password" id="signINPassword">
+                            <label class="mdl-textfield__label modal_label--underline" for="signINPassword">Hasło</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mx-auto">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal_button" type="submit"
+                                id="signINButton">
+                            Zaloguj się
+                        </button>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal rejestracja -->
+    <div class="modal fade" id="modalRegistration" tabindex="-1" role="dialog" aria-labelledby="modal_title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title modal_title">REJESTRACJA</p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="contentModalRegister"></div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title">Login:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6  form-inline">
+                            <input class="mdl-textfield__input modal_input" placeholder="Login" type="text" id="registerLogin">
+                            <label class="mdl-textfield__label modal_label--underline" for="registerLogin"></label>
+                            <span class="mdl-textfield__error modal_error" id="validLogin"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title" id="divRegisterNewPassword1">Hasło:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6 form-inline" id="divRegisterNewPassword">
+                            <input class="mdl-textfield__input modal_input" placeholder="Hasło" type="password" id="registerNewPassword">
+                            <label class="mdl-textfield__label modal_label--underline" for="registerNewPassword"></label>
+                            <span class="mdl-textfield__error modal_error" id="validNewPassword"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title">Powtórz hasło:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6  form-inline">
+                            <input class="mdl-textfield__input modal_input" placeholder="Powtórz hasło" type="password" id="registerRepeatPassword">
+                            <label class="mdl-textfield__label modal_label--underline" for="registerRepeatPassword"></label>
+                            <span class="mdl-textfield__error modal_error" id="comparePassword"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title">E-mail:</div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6  form-inline">
+                            <input class="mdl-textfield__input modal_input" placeholder="E-mail" type="text" id="registerEmail">
+                            <label class="mdl-textfield__label modal_label--underline" for="registerEmail"></label>
+                            <span class="mdl-textfield__error modal_error" id="validEmail"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-md-2 col-md-2 modal_label--title"></div>
+                        <div class="mdl-textfield mdl-js-textfield col-sm-6 modal_container_checkbox  form-inline">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkboxStatute">
+                                <input type="checkbox" id="checkboxStatute" class="mdl-checkbox__input">
+                                <span class="mdl-checkbox__label modal_container_checkbox">Akceptuję <a href="@Url.Action("Regulamin", "Home")" class="modal_container_checkbox_link">regulamin</a> sklepu</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mx-auto">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal_button" type="submit"
+                                id="registerButton">
+                            Zarejestruj się
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div id="linkToDetail" style="display:none"> @Url.Action("SzczegolyProduktu", "Produkt", null, Request.Url.Scheme);</div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+
+            var linkToDetail = document.getElementById("linkToDetail").innerHTML;
+            linkToDetail = linkToDetail.slice(0, -1);
+
+            $("input#searchProduct").autocomplete({
+                source: function (request, response) {
+                    var categorySelected = $('[id*=categorySelected]').val();
+                    $.ajax({
+                        url: '/Produkt/SzukajZPodopowiedziami',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ productName: request.term, categoryID: categorySelected }),
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                if (item.ProductID == -1)
+                                {
+                                    return {
+                                        label: item.ProductName,
+                                        value: "#",
+                                        price: ""
+                                    }
+                                }
+                                return {
+                                    label: item.ProductName,
+                                    value: linkToDetail + "?productID=" + item.ProductID,
+                                    price: item.PriceB
+                                }
+                            }))
+                        },
+                        error: function (response) {
+                            alert("error" + response.responseText);
+                        },
+                        failure: function (response) {
+                            alert("failuter" + response.responseText);
+                        },
+                    });
+                },
+
+                select: function (event, ui) {
+                    if (ui.item.value == "#") {
+                        return;
+                    }
+                    window.location.href = ui.item.value;
+                },
+                minLength: 2
+
+
+            }).autocomplete("instance")._renderItem = function (ul, item) {
+            
+                return $("<li>")
+                    .append('<div class="searchSuggestion">' + item.label + '<b class="searchSuggestionPrice" > &thinsp;' + item.price + "</b></div>")
+                    .appendTo(ul);
+            };
+
+            // logowanie
+            $("#signINButton").click(function () {
+                var login = document.getElementById("signINLogin").value;
+                var password = document.getElementById("signINPassword").value;
+                var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,200}/;
+                if (login.length < 4) {
+                    document.getElementById("contentModal").innerHTML = "Niepoprawny login lub hasło";
+                    document.getElementById("contentModal").style.color = "red";
+                    return;
+                }
+
+                if (!pattern.test(password)) {
+                    document.getElementById("contentModal").innerHTML = "Niepoprawny login lub hasło";
+                    return;
+                }
+
+                $.post("/Logowanie/Logowanie",
+                    {
+                        Login: login,
+                        Password: password
+                    },
+                    function (data, status) {
+                        if (data == "OK") {
+                            window.location.href = "/Home/Index";
+                        }
+                        else {
+                            document.getElementById("contentModal").innerHTML = "Niepoprawny login lub hasło";
+                        }
+                    });
+            });
+
+            //rejestracja
+            $("#registerButton").click(function () {
+                var login = document.getElementById("registerLogin").value;
+                var newPassword = document.getElementById("registerNewPassword").value;
+                var repeatPassword = document.getElementById("registerRepeatPassword").value;
+                var email = document.getElementById("registerEmail").value;
+                var checkStatue = document.querySelector('#checkboxStatute').checked;;
+                var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,200}/;
+                var patternEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+                var contentModal = "";
+                var failDisplay = false;
+
+                if (login.length < 4) {
+                    contentModal += "<li>Login musi liczyć minimum 4 znaki</li>";
+                    failDisplay = true;
+                }
+
+                if (!pattern.test(newPassword)) {
+                    contentModal += "<li>Hasło musi liczyć od 8 do 200 znaków oraz składać się z conajmniej jednej wielkiej litery, jednej małej litery oraz cyfry</li>";
+                    failDisplay = true;
+                }
+                if (newPassword != repeatPassword) {
+                    contentModal += "<li>Hasła nie są identyczne</li>";
+                    failDisplay = true;
+                }
+                if (email.length < 1) {
+                    contentModal += "<li>Pole E-mail nie może być puste</li>";
+                    failDisplay = true;
+                }
+                else if (!patternEmail.test(email)) {
+                    contentModal += "<li>Podano zły adres e-mail</li>";
+                    failDisplay = true;
+                }
+                if (checkStatue == false) {
+                    contentModal += "<li>Nie zaakceptowano regulaminu</li>"
+                    failDisplay = true;
+                }
+                if (failDisplay) {
+                    document.getElementById("contentModalRegister").innerHTML = '<ul style="text-align: left; color: red;">' + contentModal + "</ul>";
+                    document.getElementById("contentModalRegister").style.color = "red";
+                    return;
+                }
+
+                $.post("/Logowanie/Rejestracja",
+                    {
+                        Login: login,
+                        Password: newPassword,
+                        PasswordRepeat: repeatPassword,
+                        Email: email,
+                        Statute: checkStatue
+                    },
+
+                    function (data, status) {
+                        if (data == "OK") {
+                            document.getElementById("contentModalRegister").innerHTML = "<p class='modal_resultRegistration'>Konto zostało zarejestrowane. Na podany adres e-mail został wysłany link aktywacyjny.</p>";
+                        }
+                        else {
+                            document.getElementById("contentModalRegister").innerHTML = '<ul style="text-align: left; color: red;">' + "<li>" + data + "</li" + "</ul>";
+                        }
+                    });
+
+            });
+
+
+
+        });
+
+
+
+        var inputLogin = document.querySelector('input[id=registerLogin]');
+        inputLogin.addEventListener('input', function () {
+            if (inputLogin.value.length == 0 || inputLogin.value.length > 4) {
+                document.getElementById("validLogin").innerHTML = " ";
+                return;
+            }
+            else if (inputLogin.value.length > 0 && inputLogin.value.length < 4) {
+                document.getElementById("validLogin").innerHTML = "Login musi liczyć minimum 4 znaki";
+            }
+        });
+
+
+        var inputNewPass = document.querySelector('input[id=registerNewPassword]');
+        inputNewPass.addEventListener('input', function () {
+            var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,200}/;
+            if (inputNewPass.value.length == 0) {
+                document.getElementById("validNewPassword").innerHTML = "";
+                document.getElementById("divRegisterNewPassword").className = "mdl-textfield mdl-js-textfield col-sm-6  form-inline";
+                console.log("coś tam0")
+                return;
+            }
+            if (pattern.test(inputNewPass.value)) {
+                document.getElementById("validNewPassword").innerHTML = "";
+                document.getElementById("divRegisterNewPassword").className = "mdl-textfield mdl-js-textfield col-sm-6  form-inline";
+                console.log("coś tam1")
+                return;
+            } else {
+                document.getElementById("validNewPassword").innerHTML = "Hasło musi liczyć od 8 do 200 znaków oraz składać się z conajmniej jednej wielkiej litery, jednej małej litery oraz cyfry";
+                $("#divRegisterNewPassword").addClass('modalRegistration_input--newPassword');
+                //   document.getElementByID("divRegisterNewPassword").className = "mdl-textfield mdl-js-textfield col-sm-6  form-inline modalRegistration_input--newPassword";
+                return;
+            }
+        });
+
+        var inputRPass = document.querySelector('input[id=registerRepeatPassword]');
+        inputRPass.addEventListener('input', function () {
+
+            if (inputRPass.value.length == 0) {
+                document.getElementById("comparePassword").innerHTML = "";
+                return;
+            }
+
+            if (inputNewPass.value == inputRPass.value) {
+                document.getElementById("comparePassword").innerHTML = "";
+            } else {
+                document.getElementById("comparePassword").innerHTML = "Hasła nie są identyczne";
+            }
+        });
+
+        var inputEmail = document.querySelector('input[id=registerEmail]');
+        inputEmail.addEventListener('input', function () {
+
+            if (inputEmail.value.length == 0) {
+                document.getElementById("validEmail").innerHTML = "Pole E-mail nie może być puste";
+                return;
+            }
+            else {
+                document.getElementById("validEmail").innerHTML = "";
+            }
+        });
+    </script>
+</body>
+</html>

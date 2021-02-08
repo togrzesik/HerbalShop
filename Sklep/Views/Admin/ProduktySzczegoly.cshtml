@@ -1,0 +1,199 @@
+﻿@model Sklep.Models.ViewModel.Admin.ProductViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+<div class="admin_addDelivery col-10 offset-md-1">
+    <p class="admin_rightSide_titlePage">Dodaj produkt</p>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Nazwa produktu:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Nazwa produktu", @id = "ProductName" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="ProductName"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validName"></span>
+
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Producent:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.CodeProduct, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Producent", @id = "CodeProduct" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="CodeProduct"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validCode"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena przed promocją (netto):</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.OldPriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena przed promocją (netto)", @id = "OldPriceN" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="OldPriceN"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validOldPriceN"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena (netto):</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.PriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena (netto)", @id = "PriceN" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="PriceN"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validPriceN"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">VAT:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "VAT", @id = "VAT", @min = "0", @max = "1" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="VAT"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validVAT"></span>
+            </div>
+           
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Ilość:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Ilość", @id = "Quantity" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="Quantity"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validQuantity"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Polecany:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6 modal_container_checkbox  form-inline">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Recommended">
+                        @Html.EditorFor(model => model.Recommended, new { htmlAttributes = new { @id = "Recommended", @class = "mdl-checkbox__input" } })
+                        <span class="mdl-checkbox__label modal_container_checkbox"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Wyświetlany:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6 modal_container_checkbox  form-inline">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="IsShowed">
+                        @Html.EditorFor(model => model.IsShowed, new { htmlAttributes = new { @id = "IsShowed", @class = "mdl-checkbox__input" } })
+                        <span class="mdl-checkbox__label modal_container_checkbox"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Opis:</p>
+                <div class="mdl-textfield mdl-js-textfield  col-sm-7">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "mdl-textfield__input contact_input", @rows = "12", @id = "Description", @placeholder = "Opis produktu" })
+                    <label class="mdl-textfield__label contact_input" for="Description"></label>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.ProductID, new { @id ="ProductID"})
+
+
+            <div class="row">
+                <button type="submit" id="ButtonSave" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button  admin_addProduct_button mx-auto col-12 col-md-4 ">Zapisz</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+  
+
+    $(function () {
+     
+        $("#ButtonSave").click(function () {
+            var productID = document.getElementById("ProductID").value
+            var productName = document.getElementById("ProductName").value
+            var codeProduct = document.getElementById("CodeProduct").value
+            var oldPriceN = document.getElementById("OldPriceN").value;
+            var priceN = document.getElementById("PriceN").value;
+            var vAT = document.getElementById("VAT").value;
+            var description = document.getElementById("Description").value;
+            var quantity = document.getElementById("Quantity").value;
+            var recommended = document.getElementById("Recommended").checked;
+            var isShowed = document.getElementById("IsShowed").checked;
+            console.log("vat " + vAT);
+            if (productName.length < 3) {
+                document.getElementById("validName").innerHTML = "Nazwa produktu musi liczyć minimum 3 znaki";
+                return;
+            }
+            else
+                document.getElementById("validName").innerHTML = "";
+            priceN = priceN.replace(",", ".");
+            vAT = vAT.replace(",", ".");
+
+            
+            priceN = parseFloat(document.getElementById("PriceN").value).toFixed(2);
+            if (priceN < 0 || isNaN(priceN)) {
+                document.getElementById("validPriceN").innerHTML = "Podano zły format ceny";
+                return;
+            }
+            else {
+                document.getElementById("validPriceN").innerHTML = "";
+
+                oldPriceN = parseFloat(document.getElementById("OldPriceN").value).toFixed(2);
+                if (oldPriceN < 0)
+                {
+                    document.getElementById("validPriceN").innerHTML = "Stara cena nie może być ujemna";
+                    return;
+                }
+              //  if (oldPriceN < priceN || oldPriceN == priceN) {
+                //    document.getElementById("validPriceN").innerHTML = "Nowa cena nie może być niższa lub równa od starej ceny";
+                //    return;
+              //  }
+            }
+
+            
+            vAT = parseFloat(vAT).toFixed(2);
+            if (vAT < 0 || isNaN(vAT)) {
+                document.getElementById("validVAT").innerHTML = "Podano zły format VAT";
+                return;
+            }
+            else
+                document.getElementById("validVAT").innerHTML = "";
+
+           
+            if (quantity < 0 || isNaN(quantity)) {
+                document.getElementById("validQuantity").innerHTML = "Pole ilość nie może być puste i ujemne";
+                return;
+            }
+            
+            $.post("/Admin/ProduktyEdycja",
+                {
+                        ProductId: productID,
+                        ProductName: productName,
+                        Codeproduct: codeProduct,
+                        CategoryID: "0",
+                        OldPriceN: oldPriceN,
+                        PriceN: priceN,
+                        VAT: vAT,
+                        Description: description,
+                        Quantity: quantity,
+                        Recommended: recommended,
+                        IsShowed: isShowed
+                    })
+
+                   .done(function (data) {
+                       console.log("odpowiedz");
+                       console.log("trssc: " + data);
+                       if (data == "-1"){
+                           alert("Produkt o podanej nazwie już istnieje.");
+                           return;
+                       }
+                     //  if (data == "-2") {
+                       //    alert("Produkt o podanym kodzie już istnieje.");
+                       //    return;
+                     //  }
+                       else
+                           alert("Dane produktu zostały zmienione");
+                     
+                   })
+                   .fail(function () {
+                       alert("Błąd edycji produktu. Proszę spróbować ponownie.");
+                   });
+        });
+    });
+
+
+</script>

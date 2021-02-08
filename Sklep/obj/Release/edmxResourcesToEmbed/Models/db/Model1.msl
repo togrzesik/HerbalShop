@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="sklepModelStoreContainer" CdmEntityContainer="sklepEntities">
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="sklepModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+          <ScalarProperty Name="NumOfHouse" ColumnName="NumOfHouse" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Link" ColumnName="Link" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="sklepModel.Categories">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="ParentCategoryID" ColumnName="ParentCategoryID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Deliveries">
+      <EntityTypeMapping TypeName="sklepModel.Deliveries">
+        <MappingFragment StoreEntitySet="Deliveries">
+          <ScalarProperty Name="PriceN" ColumnName="PriceN" />
+          <ScalarProperty Name="Vat" ColumnName="Vat" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="DeliveryID" ColumnName="DeliveryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Statuses">
+      <EntityTypeMapping TypeName="sklepModel.Statuses">
+        <MappingFragment StoreEntitySet="Statuses">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="sklepModel.Comments">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="sklepModel.Images">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="sklepModel.Orders">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="VatPayment" ColumnName="VatPayment" />
+          <ScalarProperty Name="PriceNPayment" ColumnName="PriceNPayment" />
+          <ScalarProperty Name="NamePayment" ColumnName="NamePayment" />
+          <ScalarProperty Name="VATDelivery" ColumnName="VATDelivery" />
+          <ScalarProperty Name="PriceNDelivery" ColumnName="PriceNDelivery" />
+          <ScalarProperty Name="NameDelivery" ColumnName="NameDelivery" />
+          <ScalarProperty Name="InvoicePath" ColumnName="InvoicePath" />
+          <ScalarProperty Name="DeliverCity" ColumnName="DeliverCity" />
+          <ScalarProperty Name="DeliverPostCode" ColumnName="DeliverPostCode" />
+          <ScalarProperty Name="DeliverNumOfHouse" ColumnName="DeliverNumOfHouse" />
+          <ScalarProperty Name="DeliverStreet" ColumnName="DeliverStreet" />
+          <ScalarProperty Name="PriceB" ColumnName="PriceB" />
+          <ScalarProperty Name="PriceN" ColumnName="PriceN" />
+          <ScalarProperty Name="LastTimeModified" ColumnName="LastTimeModified" />
+          <ScalarProperty Name="WhoModified" ColumnName="WhoModified" />
+          <ScalarProperty Name="OrderPath" ColumnName="OrderPath" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="sklepModel.Products">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="OldPriceN" ColumnName="OldPriceN" />
+          <ScalarProperty Name="IsShowed" ColumnName="IsShowed" />
+          <ScalarProperty Name="CodeProduct" ColumnName="CodeProduct" />
+          <ScalarProperty Name="PriceN" ColumnName="PriceN" />
+          <ScalarProperty Name="Recommended1" ColumnName="Recommended" />
+          <ScalarProperty Name="Vat" ColumnName="Vat" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Specification" ColumnName="Specification" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductsOfOrders">
+      <EntityTypeMapping TypeName="sklepModel.ProductsOfOrders">
+        <MappingFragment StoreEntitySet="ProductsOfOrders">
+          <ScalarProperty Name="PriceN" ColumnName="PriceN" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Vat" ColumnName="Vat" />
+          <ScalarProperty Name="NumOfOrderID" ColumnName="NumOfOrderID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ProductOfOrder" ColumnName="ProductOfOrder" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Payments">
+      <EntityTypeMapping TypeName="sklepModel.Payments">
+        <MappingFragment StoreEntitySet="Payments">
+          <ScalarProperty Name="VAT" ColumnName="VAT" />
+          <ScalarProperty Name="PriceN" ColumnName="PriceN" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Scrapers">
+      <EntityTypeMapping TypeName="sklepModel.Scrapers">
+        <MappingFragment StoreEntitySet="Scrapers">
+          <ScalarProperty Name="XKomLink" ColumnName="XKomLink" />
+          <ScalarProperty Name="CeneoLinkChecked" ColumnName="CeneoLinkChecked" />
+          <ScalarProperty Name="AlsentLinkChecked" ColumnName="AlsentLinkChecked" />
+          <ScalarProperty Name="VobistLinkChecked" ColumnName="VobistLinkChecked" />
+          <ScalarProperty Name="XKomLinkChecked" ColumnName="XKomLinkChecked" />
+          <ScalarProperty Name="CeneoLink" ColumnName="CeneoLink" />
+          <ScalarProperty Name="CeneoPrice" ColumnName="CeneoPrice" />
+          <ScalarProperty Name="AlsentLink" ColumnName="AlsentLink" />
+          <ScalarProperty Name="AlsenPrice" ColumnName="AlsenPrice" />
+          <ScalarProperty Name="VobistLink" ColumnName="VobistLink" />
+          <ScalarProperty Name="VobisPrice" ColumnName="VobisPrice" />
+          <ScalarProperty Name="DifferencePrice" ColumnName="DifferencePrice" />
+          <ScalarProperty Name="DateLastUpdate" ColumnName="DateLastUpdate" />
+          <ScalarProperty Name="XKomPrice" ColumnName="XKomPrice" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

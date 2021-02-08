@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Zapłacono pomyślnie";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Płatność</title>
+<div class="container containerStore container--failurePayment">
+    <p class="delivery_title">Pieniądze wpłyneły na nasze konto. Twoje zlecenie przyjęto do realizacji</p>
+
+    <div class="row failurePayment_container_button">
+        <div class="col-6 col-md-4  col-lg-3">
+            <a href='@Url.Action("Index", "Home")' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_detailsOrder_footer_button">
+                <i class="material-icons materilIcon_button">arrow_back</i>Wróć do sklepu
+            </a>
+        </div>
+    </div>
+</div>

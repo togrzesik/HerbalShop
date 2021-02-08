@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Usuń konto";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Usuń konto</title>
+<div class="container containerStore container--myProfile">
+    <div class="row">
+        <div class="col-xs-8 col-sm-3 col-md-3 offset-lg-1 col-lg-2 myProfile_listLinks">
+            <div class="list-group">
+                <a href='@Url.Action("Index", "MojProfil")' class="list-group-item list-group-item-action  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  myProfile_listLinks_link">
+                    Mój profil
+                </a>
+                <a href='@Url.Action("BiezaceZamowienia", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Bieżące zamówienia
+                </a>
+                <a href='@Url.Action("HistoriaZamowien", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Historia zamówień
+                </a>
+                <a href='@Url.Action("UsunKonto", "MojProfil")' class="list-group-item list-group-item-action active mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent myProfile_listLinks_link">
+                    Usuń konto
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="row">
+                <p class="mx-auto  myProfile_deleteAccount_title">Czy na pewno chcesz usunąć swoje konto?</p>
+            </div>
+            <div class="row">
+                <input class="mx-auto mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_deleteAccount_button" type="button" value="Usuń konto" onclick="location.href='@Url.Action("UsunKonto", "MojProfil", new { name = ViewBag.name}, null)'" />
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Strona główna";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+    
+<form action="" method="post" enctype="multipart/form-data">
+
+    <label for="file1">Filename:</label>
+    <input type="file" name="files" id="file1" />
+
+    <label for="file2">Filename:</label>
+    <input type="file" name="files" id="file2" />
+
+    <input type="submit" />
+</form>
+
+<div id="costam">abc</div>
+<!-- 
+   <input type="file" id="files"  name="files" onchange="loadFile(event)" />
+<input type="file" id="files1" name="files1" onchange="loadFile(event)" class="btn btn-success btn-file"/>
+<input type="file" id="files2" name="files2" onchange="loadFile(event)" />
+<input type="file" id="files3" name="files3" onchange="loadFile(event)" />    
+    <input type="button" id="btnUpload" value="Upload Files" class="btn btn-primary" />
+
+    -->
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><input type="file" id="files" name="files" onchange="loadFile(event, 0)" /></th>
+            <th><input type="file" id="files1" name="files1" onchange="loadFile(event, 1)" class="btn btn-success btn-file" /></th>
+            <th><input type="file" id="files2" name="files2" onchange="loadFile(event, 2)" /></th>
+            <th><input type="file" id="files3" name="files3" onchange="loadFile(event, 3)" /> </th>
+            <th><input type="button" id="btnUpload" value="Upload Files" class="btn btn-primary" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+         <td>
+             <div id="imagesUpload0">
+
+             </div>   
+        </td>
+        <td>
+            <div id="imagesUpload1">
+
+            </div>
+        </td>
+        <td>
+            <div id="imagesUpload2">
+
+            </div>
+    </td>
+    <td>
+        <div id="imagesUpload3">
+
+        </div>
+</td>
+
+</tbody>
+</table>
+
+
+
+
+
+
+<script>
+    
+
+    var loadFile = function (event, number) {
+        $("#imagesUpload" + number).text("");
+        var files = event.target.files;
+ 
+        for (var i = 0; i < files.length; i++) {
+            $("#imagesUpload" + number).append('<img src="' + URL.createObjectURL(event.target.files[i]) + '" class="addPicture">');
+        }
+    }
+        $(document).ready(function(){
+            $('#btnUpload').click(function () {
+                document.getElementById("costam").innerHTML = "na poczatku";
+                // Checking whether FormData is available in browser
+                if (window.FormData !== undefined) {
+                    document.getElementById("costam").innerHTML = "w ifie";
+                    var fileUpload = $("#files").get(0);
+                    var fileUpload1 = $("#files1").get(0);
+                    var fileUpload2 = $("#files2").get(0);
+                    var fileUpload3 = $("#files3").get(0);
+                    
+                    var files = fileUpload.files;
+                    var files1 = fileUpload1.files;
+                    var files2 = fileUpload2.files;
+                    var files3 = fileUpload3.files;
+                    // Create FormData object
+                    var fileData = new FormData();
+
+                    if (files.length > 0)
+                        fileData.append(files[0].name, files[0]);
+                    if (files1.length)
+                        fileData.append(files1[0].name, files1[0]);
+                    if (files2.length)
+                        fileData.append(files2[0].name, files2[0]);
+                    if (files3.length)
+                        fileData.append(files3[0].name, files3[0]);
+                    
+
+                    // Adding one more key to FormData object
+                    fileData.append('username', 'Manas');
+
+            $.ajax({
+            url: '/Home/UploadFiles',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+            alert(result);
+        },
+                error: function (err) {
+            alert(err.statusText);
+        }
+            });
+        } else {
+            alert("FormData is not supported.");
+                }
+                document.getElementById("costam").innerHTML = "po wszystkim";
+    });
+});
+</script>
+
+

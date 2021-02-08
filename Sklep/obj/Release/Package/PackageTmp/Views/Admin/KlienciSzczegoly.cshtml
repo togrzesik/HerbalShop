@@ -1,0 +1,64 @@
+﻿@model Sklep.Models.db.Users
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+<div class="admin_detailsClien col-10 offset-md-1">
+    <p class="admin_rightSide_titlePage">Szczegóły klienta</p>
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="row">
+                <p class="admin_details_list_label col-5">ID:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.UserID)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Login:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.UserName)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Imię:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Name)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Nazwisko:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Surname)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Is_Active:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.IsActive)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">E-mail:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Email)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Numer telefonu:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PhoneNumber)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addressTitle col-6 col-md-6 offset-md-1">Adres wysyłkowy</p>
+
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Ulica:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Street)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Numer mieszkania/ domu:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.NumOfHouse)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Kod pocztowy:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PostCode)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Miasto:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.City)</p>
+            </div>
+            <div class="row">
+                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_detailsClient_deleteUserButton col-10 col-md-3 " onclick="location.href='@Url.Action("KlienciUsun", "Admin", new {userID = Model.UserID })'">Usuń konto </button>
+            </div>
+        </div>
+        </div>
+    </div>

@@ -1,0 +1,95 @@
+﻿@model Sklep.Models.ViewModel.StaticsWithTheNewestOrdersView
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+<title>Panel administracyjny</title>
+
+<div class="admin_main col-12 col-md-10 offset-md-1 ">
+    <p class="admin_rightSide_titlePage">Panel administracyjny</p>
+    <p class="admin_main_titlePart">Statystyki</p>
+    <div class="row">
+        <p class="admin_main_statistics"> Liczba klientów: @Html.DisplayFor(model => model.statics.NumberOfClients)</p>
+    </div>
+    <div class="row">
+        <p class="admin_main_statistics">Liczba wszystkich zamówień: @Html.DisplayFor(model => model.statics.NumberOfAllOrders)</p>
+    </div>
+    <div class="row">
+        <p class="admin_main_statistics">Liczba zamówień do realizacji: @Html.DisplayFor(model => model.statics.NumberOfOrdersToRealize)</p>
+    </div>
+    <div class="row">
+        <p class="admin_main_statistics">Liczba wszystkich produktów: @Html.DisplayFor(model => model.statics.NumberOfProducts)</p>
+    </div>
+
+    <p class="admin_main_titlePart">Najnowsze zamówienia</p>
+   
+    <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive  " width="100%">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Nr zamówienia</th>
+                <th class="mdl-data-table__cell--non-numeric">Klient</th>
+                <th class="mdl-data-table__cell--non-numeric ">Kwota (brutto)</th>
+                <th class="mdl-data-table__cell--non-numeric ">Status</th>
+                <th class="mdl-data-table__cell--non-numeric"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.listOrders)
+            {
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">@item.OrderID</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.UserName</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.PriceB</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.status</td>
+                    <td><input class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_clients_button" type="button" value="Szczegóły" onclick="location.href='@Url.Action("ZamowieniaSzczegoly", "Admin", new { orderID = item.OrderID}, null)'" /></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "25%" },
+                { "width": "20%" }
+            ],
+            "language": {
+                "lengthMenu": "Wyświetl _MENU_ rekordów na stronie",
+                "zeroRecords": "Brak rekordów",
+                "info": "",
+                "infoEmpty": "Brak rekorów",
+                "emptyTable": "Brak danych",
+                "loadingRecords": "Wczytywanie...",
+                "processing": "Przetwarzanie...",
+                "infoFiltered": "(filtrowane z _MAX_ wszystkich rekordów)",
+
+                "paginate": {
+                    "first": "Pierwsza",
+                    "last": "Ostatnia",
+                    "next": "Następna",
+                    "previous": "Poprzednia"
+                },
+                "aria": {
+                    "sortAscending": ": sortowanie rosnąco",
+                    "sortDescending": ": sortowanie malejąco"
+                },
+                "sSearch": "Filtruj: ",
+                "sSearchPlaceholder": "Filtruj"
+            },
+            "paginate": false,
+            'searching': false
+        });
+       
+
+
+    });
+</script>

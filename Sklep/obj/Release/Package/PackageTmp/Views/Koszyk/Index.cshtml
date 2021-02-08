@@ -1,0 +1,183 @@
+﻿@model IList<Sklep.Models.ViewModel.ShoppingCartView>
+@{
+    ViewBag.Title = "Koszyk";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Koszyk</title>
+
+<div class="container containerStore  container--ShoppingCart">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="shoppingCart_title">Koszyk</p>
+        </div>
+    </div>
+
+    @{ if (ViewBag.Status == 0)
+
+        {
+            <div class="container_emptyShoppingCart">
+                <p class="emptyShoppingCart_text">Koszyk jest pusty</p>
+                @Html.Action("ProductsBestseller", "Home")
+            </div>
+            
+            
+        }
+        else
+        {
+            using (Html.BeginForm("ZmienIlosc", "Koszyk", FormMethod.Post))
+            {
+                <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive">
+                    <thead>
+                        <tr>
+                            <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop">Produkt</th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop">Cena (netto)</th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop">Cena (brutto)</th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop">Ilość</th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop">Razem (brutto)</th>
+                            <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                           
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric"></td>
+                                <td class="mdl-data-table__cell--non-numeric"><img src="@Url.Content(Model[i].ImagePath)" height="100%" /></td>
+                                <td class="mdl-data-table__cell--non-numeric dataTables_column">
+                                    <a href='@Url.Action("SzczegolyProduktu", "Produkt", new { productID = Model[i].ProductID })' class="shoppingCart_table_link">
+                                        @Html.DisplayFor(x => Model[i].ProductName)</a></td>
+                                <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(x => Model[i].ProductPriceN)</td>
+                                <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(x => Model[i].ProductPriceB)</td>
+                                <td class="mdl-data-table__cell--non-numeric">@Html.EditorFor(x => Model[i].QuantityChoose, new { htmlAttributes = new { @onchange = "this.form.submit();", @placeholder = @Model[i].QuantityChoose, @type = "number", @min = "1", @max = Model[i].QuantityDB, @class = "form-control shoppingCart_quantityinput" } }) </td>
+                                <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(x => Model[i].TotalProductPriceB)</td>
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    <a href='@Url.Action("UsunZKoszyka", "Koszyk", new { ProductID = Model[i].ProductID })' class="shoppingCar_removeItem_button">
+                                        <i class="material-icons">clear</i>
+                                    </a>
+                                </td>
+                                <td style="display: none;">
+                                    @Html.HiddenFor(x => Model[i].ProductID)
+                                @Html.HiddenFor(x => Model[i].ImagePath)
+                                @Html.HiddenFor(x => Model[i].ProductName)
+                                @Html.HiddenFor(x => Model[i].ProductPriceB)
+                                @Html.HiddenFor(x => Model[i].TotalProductPriceB)
+                                @Html.HiddenFor(x => Model[i].QuantityDB)
+                            </td>
+                            </tr>
+
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="row">
+
+                <div class="offset-md-2 offset-lg-6 col-md-5">
+                    <div class="row shoppingCart_summary">
+                        <p class="shoppingCart_summary_nettoPrice">
+                            Łącznie (netto): @ViewBag.OrderPriceN
+                        </p>
+                    </div>
+                    <div class="row shoppingCart_summary">
+                        <p class="shoppingCart_summary_bruttoPrice">
+                            Łącznie (brutto): @ViewBag.OrderPriceB
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row shoppingCart_footer">
+                <div class="auto">
+                    <a href='@Url.Action("Index", "Home")' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect shoppingCart_footer_button shoppingCart_footer_button--returnToSite">
+                        <i class="material-icons materilIcon_button">arrow_back</i>Wróć do sklepu
+                    </a>
+                </div>
+                <div class="auto offset-md-4 offset-lg-6">
+                    <a href='@Url.Action("ZlozZamowienie", "Zamowienia")' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect shoppingCart_footer_button myProfile_detailsOrder_footer_button--returnToSite">
+                        <i class="material-icons materilIcon_button">payment</i>Złóż zamówienie
+                    </a>
+                </div>
+
+            </div>
+
+
+        }
+    }
+
+</div>
+
+
+@{ if (ViewBag.display == "1")
+    {
+        <div id="myModal" class="modal fade modal_result" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title modal_result_title">@ViewBag.titleModal</p>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal_result_content">@Html.Raw(@ViewBag.contentModal)</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal_result_button" data-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+<script>
+    
+    $(document).ready(function () {
+
+        $("#myModal").modal({
+        });
+
+
+        var t = $('#example').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "5%" },
+                { "width": "5%" },
+                { "width": "30%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "15%" },
+                { "width": "10%" },
+                { "width": "0%" },
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 1
+            }],
+           
+            "paginate": false,
+            'searching': false,
+            'info': false
+        });
+        $(".dataTables_length").addClass("form-inline dataTable_textSelectRow");
+        $(".dataTables_length label").addClass("form-inline");
+
+        t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+    });
+</script>

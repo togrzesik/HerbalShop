@@ -1,0 +1,102 @@
+﻿@model Sklep.Models.ViewModel.ContactView
+@{
+    ViewBag.Title = "Kontakt";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Kontakt</title>
+
+<div class="container containerStore container--contact">
+    <div class="row">
+        <div class="col-lg-6">
+            <p class="row contact_title">Dane kontaktowe</p>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Telefon:</p>
+                <p class="col-lg-7 contact_detail contact_detail--content">601 601 601</p>
+            </div>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Adres:</p>
+                <p class="col-lg-7 contact_detail contact_detail--content">
+                    ul. Wielkopolska 3/10
+                    54-540 Poznań
+                </p>
+            </div>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Adres e-mail:</p>
+                <p class="col-lg-7 contact_detail contact_detail--content">sklep@sklep.pl</p>
+            </div>
+
+            <p class="row contact_title contact_title--other">Godziny pracy</p>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Poniedziałek-sobota (oprócz świąt):</p>
+                <p class="col-lg-7 contact_detail contact_detail--content"> 8:00-20:00</p>
+            </div>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Niedziela (oprócz świąt):</p>
+                <p class="col-lg-7 contact_detail contact_detail--content">10:00-18:00</p>
+            </div>
+            <p class="row contact_title contact_title--other">Konto bankowe</p>
+            <div class="row">
+                <p class="col-lg-4 contact_detail">Numer konta:</p>
+                <p class="col-lg-7 contact_detail contact_detail--content">10 3223 1132 0000 6332 8431 3236</p>
+            </div>
+            <div class="row">
+                <p class="col-lg-4 contact_detail"></p>
+                <p class="col-lg-7 contact_detail contact_detail--content contact_detail--numberAccount">Bank Zachodni WBK S.A. Poznań</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+
+            <p class="row contact_title">Zadaj pytanie</p>
+           @using (Html.BeginForm("WyslijPytanie", "Home", FormMethod.Post))
+           {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <p class="col-lg-4 contact_labelInput">Twój adres e-mail:</p>
+                <div class="mdl-textfield mdl-js-textfield col-sm-7  form-inline">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "mdl-textfield__input contact_input", @id = "contactEmail", @placeholder = "Twój adres e-mail", @type="email" } })
+                    <label class="mdl-textfield__label contact_input" for="contactEmail"></label>                    
+                </div>
+            </div>
+            <div class="row">
+                <p class="col-lg-4 contact_labelInput">Treść wiadomości:</p>
+                <div class="mdl-textfield mdl-js-textfield  col-sm-7">
+                    @Html.TextAreaFor(model => model.Content, new { @class = "mdl-textfield__input contact_input", @rows = "12", @id = "contactContent", @placeholder = "Napisz wiadomość" })
+                    <label class="mdl-textfield__label contact_input" for="contactContent"></label>
+                </div>
+            </div>
+            <div class="row">
+                <button class="mx-auto  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect contact_button" type="submit">Wyślij</button>
+            </div>
+           }
+        </div>
+    </div>
+</div>
+
+
+@{ if (ViewBag.display == "1")
+    {
+        <div id="myModal" class="modal fade modal_result" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title modal_result_title">@ViewBag.titleModal</p>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal_result_content">@ViewBag.contentModal</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal_result_button" data-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+<script>
+    $(function () {
+    $("#myModal").modal({
+        });
+    });
+</script>

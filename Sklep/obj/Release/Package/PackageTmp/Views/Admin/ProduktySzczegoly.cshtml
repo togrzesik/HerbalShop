@@ -1,0 +1,159 @@
+﻿@model Sklep.Models.ViewModel.Admin.ProductViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+@using (Html.BeginForm("ProduktyEdycja", "Admin", FormMethod.Post))
+{
+    <table class="table table-hover koszyk2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Kod produktu:</th>
+                <th>Cena(netto)</th>
+                <th>VAT</th>
+                <th>Cena(brutto)</th>
+                <th>Kategoria</th>
+                <th>Liczba</th>
+                <th>Polecany</th>
+                <th>Wyświetlany</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.ProductID)</td>
+                <td>@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @min = "0" } })</td>
+                <td>
+                    @Html.EditorFor(model => model.CodeProduct, new { htmlAttributes = new { @class = "form-control", @id = "CodeProduct" } })
+                    <span class="field-validation-valid text-danger" id="validCode"></span>
+                </td>
+
+                <td>@Html.EditorFor(model => model.PriceN, new { htmlAttributes = new { @class = "form-control", @min = "0" } })</td>
+                <td>@Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "form-control", @min = "0", @max = "1" } })</td>
+                <th>@Html.DisplayFor(model => model.PriceB)</th>
+                <td>@Html.DropDownList("categorySelect", null, new { @class = "form-control", @id = "categorySelected" })</td>
+                <td>@Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @min = "0" } })</td>
+                <td>@Html.EditorFor(model => model.Recommended)</td>
+                <td>@Html.EditorFor(model => model.IsShowed, new { htmlAttributes = new { @id = "IsShowed" } })</td>
+                @Html.HiddenFor(model => model.CategoryID)
+                @Html.HiddenFor(model => model.CategoryName)
+            </tr>
+        </tbody>
+    </table>
+    <div>test </div>
+
+        <div class="form-group">
+            Opis produktu: @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 6 })
+            Specyfikacja produktu: @Html.TextAreaFor(model => model.Specification, new { @class = "form-control", @rows = 6 })
+        </div>
+        @Html.HiddenFor(model => model.ProductID)
+        <input type="submit" class="btn btn-default" value="Zapisz" />
+}
+
+      
+
+<div id="Specyfication">
+@{Html.RenderAction("GetSpecyfication", new { productID = Model.ProductID, categoryID = Model.CategoryID }); }
+</div>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><input type="file" id="files" name="files" onchange="loadFile(event, 0)" /></th>
+            <th><input type="file" id="files1" name="files1" onchange="loadFile(event, 1)" /></th>
+            <th><input type="file" id="files2" name="files2" onchange="loadFile(event, 2)" /></th>
+            <th><input type="file" id="files3" name="files3" onchange="loadFile(event, 3)" /> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <div id="imagesUpload0">
+
+                </div>
+            </td>
+            <td>
+                <div id="imagesUpload1">
+
+                </div>
+            </td>
+            <td>
+                <div id="imagesUpload2">
+
+                </div>
+            </td>
+            <td>
+                <div id="imagesUpload3">
+
+                </div>
+            </td>
+
+    </tbody>
+</table>
+
+        <script>
+            var categoryID = $('[id*=categorySelected]').val();
+
+            var loadFile = function (event, number) {
+
+                var files = event.target.files;
+                if (files.length == 1) {
+                    $("#imagesUpload" + number).text("");
+            console.log("files wyp " + files[0].name);
+                    $("#imagesUpload" + number).append('<img src="' + URL.createObjectURL(event.target.files[0]) + '" class="addPicture" id="image' + number + '">');
+                    return;
+            }
+
+            var array = @Html.Raw(Json.Encode(@ViewBag.imagesList));
+
+                if (files.length == 0) {
+                    $("#imagesUpload" + number).text("");
+                    if (array.length > number)
+                    {
+
+                        array[number] = array[number].substring(1);
+                        $("#imagesUpload" + number).append('<img src="' + array[number] + '" class="addPicture" id="image' + number + '">');
+        }
+
+    }
+
+            }
+            $(function () {
+                var array = @Html.Raw(Json.Encode(@ViewBag.imagesList));
+                for (var i = 0; i < array.length; i++) {
+                    console.log("array " + array[i]);
+                    array[i] = array[i].substring(1);
+                    $("#imagesUpload" + i).append('<img src="' + array[i] + '" class="addPicture" id="image' + i + '">');
+                }
+
+           $('[id*=categorySelected]').on("change", function () {
+            var categorySelected = $('[id*=categorySelected]').val();
+
+            switch (categorySelected) {
+                case "0":
+                    document.getElementById("Specyfication").innerHTML = "";
+                    return;
+                case "5":
+                    $('#Specyfication').load('@Url.Action("LaptopDetails","Admin")');
+                    break;
+                case "6":
+                    $('#Specyfication').load('@Url.Action("ProcessorDetails","Admin")');
+                    break;
+                default:
+                    document.getElementById("Specyfication").innerHTML = "";
+                    return;
+
+            }
+
+
+         
+        });
+            });
+        </script>

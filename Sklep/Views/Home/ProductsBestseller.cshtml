@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Sklep.Models.ViewModel.ProductRecommededView>
+
+
+
+
+@{ if (ViewBag.Ilosc == 0)
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    }
+    else
+    {
+        <div class="container container--productsBestseller">
+            <div class="col-md-2 offset-md-5 products_title">
+                Bestsellery
+            </div>
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-2 card productsBestseller_productBestseller">
+                        <a href='@Url.Action("SzczegolyProduktu", "Produkt", new { productID = @item.ProductID })' class="product_img">
+                            <img class="img-responsive" src="@Url.Content(item.ImagePath)" style="width:100%" alt="Produkt">
+                            <div class="card-title productsBestseller_productBestseller_Title">@item.Name</div>
+                        </a>
+                        <div class="body">
+                            @if (item.OldPriceB != null)
+                            {
+                                <div class="row">
+                                    <div class="productsBestseller_productBestseller_Price--Old mx-auto">
+                                        Cena:&nbsp
+                                        <strike>@item.OldPriceB</strike>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="productsBestseller_productBestseller_Price--New mx-auto">@item.PriceB</div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="productsBestseller_productBestseller_Price--Old mx-auto">
+                                        Cena:&nbsp
+                                        @item.PriceB
+                                    </div>
+
+                                </div>
+                            }
+                            <div class="row">
+                                <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mx-auto productsBestseller_productBestseller_buttonBestseller" id="Button_add_to_cart" type="button" value="Dodaj do koszyka"
+                                       onclick="location.href='@Url.Action("DodajDoKoszyka", "Koszyk", new { ProductID = item.ProductID })'" />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+            
+        </div>
+        }
+    }

@@ -1,0 +1,105 @@
+﻿@model Sklep.Models.ViewModel.DeliveryAddressViewModel
+@{
+    ViewBag.Title = "Wybór dostawy";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<title>Wybór dostawy</title>
+
+<div class="container containerStore container--chooseDelivery">
+@using (Html.BeginForm("Podsumowanie", "Zamowienia", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <p class="chooseDelivery_form_title col-md-5">Złożenie zamówienia</p>
+    </div>
+   
+        <div class="card card_myProfile">
+            <div class="card-body">
+                <div class="card-title card_myProfile_title">Dane dostawy</div>
+                <div class="row">
+                    <div class="card_myProfile_inputLabel--title col-md-5 col-lg-4">Wybór dostawy: </div>
+                    @Html.DropDownList("deliveriesList", (SelectList)ViewBag.DropList, new { @class = "modal_input form-control chooseDeliv ery_form_select col-6" })
+                </div>
+                <div>W przypadku wyboru przesyłki kurierskiej bez pobrania klient jest zobowiązany do zapłaty przesyłki przelewem.</div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Name, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "name", @placeholder = "Imię" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="name"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Surname, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "surname", @placeholder = "Nazwisko" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="surname"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.Street, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "street", @placeholder = "Ulica" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="street"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.NumOfHouse, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.NumOfHouse, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "numofhouse", @placeholder = "Numer domu/lokalu" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="numofhouse"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.PostCode, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "postcode", @placeholder = "Kod pocztowy" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="postcode"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    @Html.LabelFor(model => model.City, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                    <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                        @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "city", @placeholder = "Miasto" } })
+                        <label class="mdl-textfield__label modal_label--underline col-9" for="city"></label>
+                        <span class="mdl-textfield__error modal_error"></span>
+                    </div>
+                </div>
+
+                        <div class="row">
+                            <div class="offset-3 offset-md-5 offset-lg-4 card_myProfile_colButton">
+                                <button id="finalOrderExecution" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect card_myProfile_button" type="submit">Wybieram dostawę z obowiązkiem zapłaty</button>
+                            </div>
+                        </div>
+                 
+            </div>
+      
+    </div>
+}
+</div>
+
+<script>
+    $(function () {
+        $('#deliveriesList').on('change', function (e) {
+            var deliver = $(this).val();
+            if (deliver == 1) {
+                $("#finalOrderExecution").text('Wybieram dostawę z obowiązkiem zapłaty');
+            }
+            else {
+                console.log("Dupa312312")
+                $("#finalOrderExecution").text('Wybieram dostawę za pobraniem');
+            }
+        })
+    })
+
+</script>
+
+ 

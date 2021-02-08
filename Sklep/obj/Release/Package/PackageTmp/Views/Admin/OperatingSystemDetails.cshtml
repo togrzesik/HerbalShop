@@ -1,0 +1,38 @@
+﻿@model Sklep.Models.ViewModel.Admin.OperatingSystemDetails
+
+
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Architektura:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Architecture, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Architektura", @id = "Architecture" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Architecture"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Licencja:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.License, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Licencja", @id = "License" } })
+        <label class="mdl-textfield__label modal_label--underline" for="License"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Liczba stanowisk:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.NumOfUser, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Format ekranu", @id = "AspectRatio" } })
+        <label class="mdl-textfield__label modal_label--underline" for="NumOfUser"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Liczba stanowisk:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.NumOfComputer, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Liczba stanowisk", @id = "NumOfComputer" } })
+        <label class="mdl-textfield__label modal_label--underline" for="NumOfComputer"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Język:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Language, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Język", @id = "Language" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Language"></label>
+    </div>
+</div>

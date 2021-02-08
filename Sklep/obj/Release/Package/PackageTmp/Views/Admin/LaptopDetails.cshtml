@@ -1,0 +1,94 @@
+﻿@model Sklep.Models.ViewModel.Admin.LaptopDetailsViewModel
+
+
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Procesor:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Processor, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Procesor", @id = "Processor" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Processor"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Karta graficzna:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.GraphicCard, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Karta graficzna", @id = "GraphicCard" } })
+        <label class="mdl-textfield__label modal_label--underline" for="GraphicCard"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rozmiar pamięci RAM:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.RAMSize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rozmiar pamięci RAM", @id = "RAMSize" } })
+        <label class="mdl-textfield__label modal_label--underline" for="RAMSize"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rozmiar dysku twardego:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.HDDSize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rozmiar dysku twardego", @id = "HDDSize" } })
+        <label class="mdl-textfield__label modal_label--underline" for="HDDSize"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rozmiar dysku SSD:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.SSDSize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rozmiar dysku SSD", @id = "SSDSize" } })
+        <label class="mdl-textfield__label modal_label--underline" for="SSDSize"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Napęd:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.OpticalDrive, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Napęd", @id = "OpticalDrive" } })
+        <label class="mdl-textfield__label modal_label--underline" for="OpticalDrive"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rozdzielczość ekranu:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.DisplayResolution, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rozdzielczość ekranu", @id = "DisplayResolution" } })
+        <label class="mdl-textfield__label modal_label--underline" for="DisplayResolution"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Przekątna ekranu:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.DisplaySize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Przekątna ekranu", @id = "DisplaySize" } })
+        <label class="mdl-textfield__label modal_label--underline" for="DisplaySize"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Kolor:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Color, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Kolor", @id = "Color" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Color"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Bateria:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Battery, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Bateria", @id = "Battery" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Battery"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Waga:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Waga", @id = "Weight" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Weight"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">System operacyjny:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.OperatingSystem, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "System operacyjny", @id = "OperatingSystem" } })
+        <label class="mdl-textfield__label modal_label--underline" for="OperatingSystem"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Inne:</p>
+    <div class="mdl-textfield mdl-js-textfield  col-sm-7">
+        @Html.TextAreaFor(model => model.OtherSpec, new { @class = "mdl-textfield__input contact_input", @rows = "6", @id = "OtherSpec", @placeholder = "Inne" })
+        <label class="mdl-textfield__label contact_input" for="OtherSpec"></label>
+    </div>
+</div>

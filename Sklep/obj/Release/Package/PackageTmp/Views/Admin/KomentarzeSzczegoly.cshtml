@@ -1,0 +1,38 @@
+﻿@model Sklep.Models.ViewModel.CommentViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+<div class="admin_detailsClien col-10 offset-md-1">
+    <p class="admin_rightSide_titlePage">Szczegóły komentarza</p>
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="row">
+                <p class="admin_details_list_label col-5">ID:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.CommentID)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Login:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.User)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Produkt ID:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.ProductID)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Opis:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Description)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Data:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.Date)</p>
+            </div>
+            
+            <div class="row">
+                <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_detailsClient_deleteUserButton col-10 col-md-3 " onclick="location.href='@Url.Action("KomentarzeUsun", "Admin", new {commentID = Model.CommentID})'">Usuń komentarz </button>
+            </div>
+        </div>
+    </div>
+</div>
+

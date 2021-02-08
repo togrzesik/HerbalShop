@@ -1,0 +1,177 @@
+﻿@model Sklep.Models.ViewModel.AdminDetailsOrder
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+
+<div class="admin_detailsOrder col-12 col-md-10 offset-md-1 ">
+    <p class="admin_detailsOrder_titlePage">Zamówienie numer (@Html.DisplayFor(model => model.OrderID))</p>
+    <p class="admin_detailsOrder_dateOrder">Data złożenia zamówienia: @Html.DisplayFor(model => model.OrderDate)</p>
+    <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive" width="100%">
+        <thead>
+
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Produkt ID</th>
+                <th class="mdl-data-table__cell--non-numeric"></th>
+                <th class="mdl-data-table__cell--non-numeric ">Nazwa</th>
+                <th class="mdl-data-table__cell--non-numeric ">Cena (netto)</th>
+                <th class="mdl-data-table__cell--non-numeric ">Cena (brutto)</th>
+                <th class="mdl-data-table__cell--non-numeric">Ilość</th>
+                <th class="mdl-data-table__cell--non-numeric">Razem (brutto)</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.ProductsList)
+            {
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductID</td>
+                    <td class="mdl-data-table__cell--non-numeric"><img src="@Url.Content(item.ImagePath)" height="100%" /></td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductName</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductPriceN</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductPriceB</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.QuantityChoose</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.TotalProductPriceB</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-10 mx-auto admin_details_containerCosts">
+            <div class="row ">
+                <p class="admin_details_list_label  col-5">Wybrana dostawa:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.NameDelivery)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Koszt (brutto) dostawy:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PriceBDelivery)</p>
+            </div>
+            <hr class="col-8 mx-auto" />
+            <div class="row">
+                <p class="admin_details_list_label col-5">Łącznie (netto):</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PriceN)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Łącznie (brutto):</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PriceB)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-10 mx-auto">
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addressTitle col-6 col-md-6">Adres dostawy</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Imię:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.ClientName)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Nazwisko:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.ClientSurname)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Ulica:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.DeliverStreet)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Numer mieszkania/domu:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.DeliverNumOfHouse)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Kod pocztowy:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.DeliverPostCode)</p>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label col-5">Miasto:</p>
+                <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.DeliverCity)</p>
+            </div>
+            @using (Html.BeginForm("EdytujZamowienie", "Admin", FormMethod.Post, new { @class = "admin_detailsOrder_changeStatusForm row offset-md-2" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.OrderID)
+                <div class="admin_detailsOrder_changeStatusForm_text admin_detailsOrder_changeStatusForm_text--label col-7 col-md-3">
+                    Status zamówienia:
+                </div>
+                <div class="admin_detailsOrder_changeStatusForm_text col-7 col-md-5 col-lg-4">
+                    @Html.DropDownList("statusList", null, new { @class = "form-control", @id = "statusSelected" })
+                </div>
+                <div class="admin_detailsOrder_changeStatusForm_text col-4">
+                    <input type="submit" class="admin_detailsOrder_changeStatusForm--button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button" value="Zapisz" />
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "autoWidth": false,
+                "columns": [
+                    { "width": "5%" },
+                    { "width": "10%" },
+                    { "width": "10%" },
+                    { "width": "10%" },
+                    { "width": "10%" },
+                    { "width": "5%" },
+                    { "width": "10%" },
+                ],
+                "language": {
+                    "lengthMenu": "Wyświetl _MENU_ rekordów na stronie",
+                    "zeroRecords": "Brak rekordów",
+                    "info": "",
+                    "infoEmpty": "Brak rekorów",
+                    "emptyTable": "Brak danych",
+                    "loadingRecords": "Wczytywanie...",
+                    "processing": "Przetwarzanie...",
+                    "infoFiltered": "(filtrowane z _MAX_ wszystkich rekordów)",
+
+                    "paginate": {
+                        "first": "Pierwsza",
+                        "last": "Ostatnia",
+                        "next": "Następna",
+                        "previous": "Poprzednia"
+                    },
+                    "aria": {
+                        "sortAscending": ": sortowanie rosnąco",
+                        "sortDescending": ": sortowanie malejąco"
+                    },
+                    "sSearch": "Filtruj: ",
+                    "sSearchPlaceholder": "Filtruj"
+                },
+                "paginate": false,
+                'searching': true
+            });
+            $(".dataTables_length").addClass("form-inline dataTable_textSelectRow");
+            $(".dataTables_length label").addClass("form-inline");
+            $(".dataTables_length option").addClass("dataTable_textSelectRow_option");
+            $(".dataTables_length select").addClass("form-inline form-control dataTable_textSelectRow_selectRow");
+            $(".dataTables_filter").addClass("mdl-textfield mdl-js-textfield");
+            $(".dataTables_filter label").addClass("row dataTables_filter_label");
+            $(".dataTables_filter input").addClass("col-lg-9 mdl-textfield__input dataTable_filter_input");
+            $("input.dataTable_filter_input").attr('id', 'filtruj');
+            $("input.dataTable_filter_input").after('<label class="col-lg-9 mdl-textfield__label" for="filtruj"></label>');
+
+
+        });
+    </script>
+
+
+
+

@@ -1,0 +1,92 @@
+﻿@model  IEnumerable<Sklep.Models.ViewModel.TheNewestOrdersView>
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+
+<div class="admin_clients col-12 col-md-10  offset-md-1 ">
+    <p class="admin_rightSide_titlePage">Wszystkie zamówienia</p>
+    <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive" width="100%">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric">Nr zamówienia</th>
+                <th class="mdl-data-table__cell--non-numeric">Klient</th>
+                <th class="mdl-data-table__cell--non-numeric ">Kwota</th>
+                <th class="mdl-data-table__cell--non-numeric ">Status</th>
+                <th class="mdl-data-table__cell--non-numeric">Data utworzenia zamówienia</th>
+                <th class="mdl-data-table__cell--non-numeric"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">@item.OrderID</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.UserName</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.PriceB</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.status</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.DateOrder</td>
+                    <td><input class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_clients_button" type="button" value="Szczegóły" onclick="location.href='@Url.Action("ZamowieniaSzczegoly", "Admin", new { orderID = item.OrderID}, null)'"/></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+            ],
+            "language": {
+                "lengthMenu": "Wyświetl _MENU_ rekordów na stronie",
+                "zeroRecords": "Brak rekordów",
+                "info": "",
+                "infoEmpty": "Brak rekorów",
+                "emptyTable": "Brak danych",
+                "loadingRecords": "Wczytywanie...",
+                "processing": "Przetwarzanie...",
+                "infoFiltered": "(filtrowane z _MAX_ wszystkich rekordów)",
+
+                "paginate": {
+                    "first": "Pierwsza",
+                    "last": "Ostatnia",
+                    "next": "Następna",
+                    "previous": "Poprzednia"
+                },
+                "aria": {
+                    "sortAscending": ": sortowanie rosnąco",
+                    "sortDescending": ": sortowanie malejąco"
+                },
+                "sSearch": "Filtruj: ",
+                "sSearchPlaceholder": "Filtruj"
+            },
+            "paginate": true,
+            'searching': true
+        });
+        $(".dataTables_length").addClass("form-inline dataTable_textSelectRow");
+        $(".dataTables_length label").addClass("form-inline");
+        $(".dataTables_length option").addClass("dataTable_textSelectRow_option");
+        $(".dataTables_length select").addClass("form-inline form-control dataTable_textSelectRow_selectRow");
+        $(".dataTables_filter").addClass("mdl-textfield mdl-js-textfield");
+        $(".dataTables_filter label").addClass("row dataTables_filter_label");
+        $(".dataTables_filter input").addClass("col-lg-9 mdl-textfield__input dataTable_filter_input");
+        $("input.dataTable_filter_input").attr('id', 'filtruj');
+        $("input.dataTable_filter_input").after('<label class="col-lg-9 mdl-textfield__label" for="filtruj"></label>');
+
+
+    });
+</script>
+
+

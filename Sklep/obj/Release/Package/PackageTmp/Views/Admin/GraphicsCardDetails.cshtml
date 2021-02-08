@@ -1,0 +1,53 @@
+﻿@model Sklep.Models.ViewModel.Admin.GraphicsCardViewModel
+
+
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Ilość pamięci RAM:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.MemorySize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Ilość pamięci RAM", @id = "MemorySize" } })
+            <label class="mdl-textfield__label modal_label--underline" for="MemorySize"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Taktowanie pamięci:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.FrequencyMemory, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Taktowanie pamięci", @id = "FrequencyMemory" } })
+            <label class="mdl-textfield__label modal_label--underline" for="FrequencyMemory"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rodzaj pamięci:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.KindOfMemory, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rodzaj pamięci", @id = "KindOfMemory" } })
+            <label class="mdl-textfield__label modal_label--underline" for="KindOfMemory"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Szyna:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.MemoryBus, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Szyna", @id = "MemoryBus" } })
+            <label class="mdl-textfield__label modal_label--underline" for="MemoryBus"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Taktowanie rdzenia:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.FrequencyCore, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Taktowanie rdzenia", @id = "FrequencyCore" } })
+            <label class="mdl-textfield__label modal_label--underline" for="FrequencyCore"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Wyjścia:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.Output, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Wyjścia", @id = "Output" } })
+            <label class="mdl-textfield__label modal_label--underline" for="Output"></label>
+        </div>
+    </div>
+    <div class="row">
+        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Pobór mocy:</p>
+        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+            @Html.EditorFor(model => model.PowerConsumption, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Pobór mocy", @id = "PowerConsumption" } })
+            <label class="mdl-textfield__label modal_label--underline" for="PowerConsumption"></label>
+        </div>
+    </div>
+    

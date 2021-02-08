@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Sklep.Models.ViewModel.OrderEndView>
+
+    @{
+    ViewBag.Title = "Historia zamówień";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+    }
+<title>Historia zamówień</title>
+<div class="container containerStore container--myProfile">
+    <div class="row">
+        <div class="col-xs-8 col-sm-3 col-md-3 offset-lg-1 col-lg-2 myProfile_listLinks">
+            <div class="list-group">
+                <a href='@Url.Action("Index", "MojProfil")' class="list-group-item list-group-item-action  mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  myProfile_listLinks_link">
+                    Mój profil
+                </a>
+                <a href='@Url.Action("BiezaceZamowienia", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Bieżące zamówienia
+                </a>
+                <a href='@Url.Action("HistoriaZamowien", "MojProfil")' class="list-group-item list-group-item-action active mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent myProfile_listLinks_link">
+                    Historia zamówień
+                </a>
+                <a href='@Url.Action("UsunKonto", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Usuń konto
+                </a>
+            </div>
+        </div>
+
+
+        <div class="col-sm-9">
+            <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive  ">
+                <thead>
+                    <tr>
+
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Nr zamówienia</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Produkty</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Data zakończenia</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Cena (brutto)</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td class="mdl-data-table__cell--non-numeric">@item.OrderID</td>
+                            <td class="mdl-data-table__cell--non-numeric">@item.OrderShortDescription</td>
+                            <td class="mdl-data-table__cell--non-numeric">@item.date</td>
+                            <td class="mdl-data-table__cell--non-numeric">
+                            @item.PriceB
+                            </td>
+                            <td class="mdl-data-table__cell--non-numeric col-1"><input type="button" class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_table_button" value="Szczegóły"  onclick="location.href='@Url.Action("SzczegolyZamowieniaHistoria", "MojProfil" , new { orderID=item.OrderID}, null)'" /></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "10%" },
+                { "width": "25%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+            ],
+            "order": [[0, "desc"]],
+            "language": {
+                "lengthMenu": "Wyświetl _MENU_ rekordów na stronie",
+                "zeroRecords": "Brak rekordów",
+                "info": "",
+                "infoEmpty": "Brak rekorów",
+                "emptyTable": "Brak danych",
+                "loadingRecords": "Wczytywanie...",
+                "processing": "Przetwarzanie...",
+                "infoFiltered": "(filtrowane z _MAX_ wszystkich rekordów)",
+
+              
+                "aria": {
+                    "sortAscending": ": sortowanie rosnąco",
+                    "sortDescending": ": sortowanie malejąco"
+                },
+                "sSearch": "Filtruj: ",
+                "sSearchPlaceholder": "Filtruj"
+            },
+            "paginate": false
+
+        });
+        $(".dataTables_filter").addClass("mdl-textfield mdl-js-textfield");
+        $(".dataTables_filter label").addClass("row dataTables_filter_label");
+        $(".dataTables_filter input").addClass("col-lg-9 mdl-textfield__input dataTable_filter_input");
+        $("input.dataTable_filter_input").attr('id', 'filtruj');
+        $("input.dataTable_filter_input").after('<label class="col-lg-9 mdl-textfield__label" for="filtruj"></label>');
+
+
+    });
+</script>

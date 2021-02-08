@@ -1,0 +1,51 @@
+﻿@model Sklep.Models.ViewModel.Admin.DeliveriesViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("DostawyEdycja", "Admin", FormMethod.Post))
+{
+    <div class="admin_addDelivery col-10 offset-md-1">
+        <p class="admin_rightSide_titlePage">Szczegóły dostawy</p>
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <div class="row">
+                    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Nazwa dostawy:</p>
+                    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Nazwa dostawy", @id = "NameDelivery" } })
+                        <label class="mdl-textfield__label modal_label--underline" for="NameDelivery"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena (netto):</p>
+                    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                        @Html.EditorFor(model => model.PriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena (netto)", @id = "PriceDelivery" } })
+                        <label class="mdl-textfield__label modal_label--underline" for="PriceDelivery"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">VAT:</p>
+                    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                        @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "VAT", @id = "VATDelivery" } })
+                        <label class="mdl-textfield__label modal_label--underline" for="VATDelivery"></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="admin_details_list_label col-5">Cena (brutto):</p>
+                    <p class="admin_detailsClient_list_value col-6">@Html.DisplayFor(model => model.PriceB)</p>
+                </div>
+
+                <div class="row">
+                    <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button mx-auto col-10 col-md-4 ">Zapisz</button>
+                </div>
+                <div class="row">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button admin_deliveries_button--delete mx-auto col-10 col-md-4" type="button"  onclick="location.href='@Url.Action("DostawyUsun", "Admin", new { deliveryID = Model.DeliveryID})'">Usuń dostawę </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.DeliveryID)
+}

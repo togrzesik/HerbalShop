@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Potwierdzenie";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Potwierdzenie</title>
+<div class="container containerStore container--confirmEmail">
+    <p class="confirmEmail_title">Potwierdzenie adresu e-mail</p>
+
+    @{if (@ViewBag.isConfirm == 1)
+        {
+            <p class="confirmEmail_contentSuccess">@ViewBag.Status</p>
+        }
+        else
+        {
+            <p class="confirmEmail_contentFail">@ViewBag.Status</p>
+        }
+    }
+    <div class="row">
+        <div class="auto">
+            <a href='@Url.Action("Index", "Home")' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect confirmEmail_button">
+                <i class="material-icons materilIcon_button">arrow_back</i>Wróć do sklepu
+            </a>
+        </div>
+    </div>
+</div>

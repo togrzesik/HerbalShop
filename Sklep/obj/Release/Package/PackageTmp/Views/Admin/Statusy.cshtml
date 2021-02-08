@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Sklep.Models.db.Statuses>
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<input class="btn btn-default" type="button" value="Dodaj status" onclick="location.href='@Url.Action("StatusyDodaj", "Admin")'" />
+
+<table class="table table-hover koszyk2">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+            <th>Szczegóły</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.StatusID</td>
+                <td>@item.Name</td>
+               
+                <td><input class="btn btn-default" type="button" value="Szczegóły" onclick="location.href='@Url.Action("StatusySzczegoly", "Admin", new { statusID = item.StatusID}, null)'" /></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

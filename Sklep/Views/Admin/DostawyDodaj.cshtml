@@ -1,0 +1,46 @@
+﻿@model Sklep.Models.ViewModel.Admin.DeliveriesViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+<title>Dodaj dostawę</title>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("DostawyDodaj", "Admin", FormMethod.Post))
+{
+<div class="admin_addDelivery col-10 offset-md-1">
+    <p class="admin_rightSide_titlePage">Dodaj dostawę</p>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Nazwa dostawy:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Nazwa dostawy", @id = "NameDelivery" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="NameDelivery"></label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena (netto):</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.PriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena (netto)", @id = "PriceDelivery" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="PriceDelivery"></label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">VAT:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "VAT", @id = "VATDelivery" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="VATDelivery"></label>
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.PriceB)
+
+        <div class="row">
+            <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button mx-auto col-12 col-md-4 ">Dodaj dostawę</button>
+        </div>
+    </div>
+    </div>
+</div>
+}
+
+
+

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Sklep.Models.ViewModel.CommentViewModel>
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="col-sm-10 mx-auto detailsProduct_comment">
+            <p class="detailsProduct_comment_title">@item.User, @item.Date</p>
+            <p class="detailsProduct_comment_content">
+                @item.Description
+            </p>
+        </div>
+    }
+}

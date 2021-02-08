@@ -1,0 +1,185 @@
+﻿@model Sklep.Models.ViewModel.OrderDetailsView
+
+@{
+    ViewBag.Title = "Szczegóły zamówienia";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+
+<title>Szczegóły zamówienia</title>
+
+<div class="container containerStore container--myProfile">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <p class="myProfile_detailsOrder_title">Szczegóły zamówienia (@Html.DisplayFor(model => model.OrderID))</p>
+            <p class="myProfile_detailsOrder_lastUpdate"> @Html.DisplayFor(model => model.lastTimeModified)</p>
+        </div>
+        <p class="col-md-2 offset-md-3 myProfile_detailsOrder_status">Status: @Html.DisplayFor(model => model.Status)</p>
+
+    </div>
+
+    <table id="example" class=" mdl-data-table mdl-js-data-table table-responsive  ">
+        <thead>
+            <tr>
+                <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                <th class="mdl-data-table__cell--non-numeric tableTop">Produkty</th>
+                <th class="mdl-data-table__cell--non-numeric tableTop">Cena (netto)</th>
+                <th class="mdl-data-table__cell--non-numeric tableTop">Cena (brutto)</th>
+                <th class="mdl-data-table__cell--non-numeric tableTop">Ilość</th>
+                <th class="mdl-data-table__cell--non-numeric tableTop">Razem (brutto)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model.orderProductList)
+            {
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric"></td>
+                    <td class="mdl-data-table__cell--non-numeric"><img src="@Url.Content(@item.ImagePath)" height="40px" /></td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductName</td>
+                    <td class="mdl-data-table__cell--non-numeric"> @item.ProductPriceN</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.ProductPriceB</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.QuantityChoose</td>
+                    <td class="mdl-data-table__cell--non-numeric">@item.TotalProductPriceB</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="row">
+        <p class="myProfile_detailsOrder_addressTitle mx-auto">Adres dostawy</p>
+        <div class="col-md-12 mx-auto">
+            <table id="example1" class=" mdl-data-table mdl-js-data-table table-responsive   ">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Ulica</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Numer domu/lokalu</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Kod pocztowy</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop">Miejscowość</th>
+                        <th class="mdl-data-table__cell--non-numeric tableTop"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                        <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(model => model.Street)</td>
+                        <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(model => model.NumOfHouse)</td>
+                        <td class="mdl-data-table__cell--non-numeric">@Html.DisplayFor(model => model.PostCode)</td>
+                        <td class="mdl-data-table__cell--non-numeric"> @Html.DisplayFor(model => model.City)</td>
+                        <td class="mdl-data-table__cell--non-numeric"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-lg-3">
+
+            <div class="">
+                <a href='@Url.Action("PobierzZamowienie", "MojProfil", new { orderID = ViewBag.orderID})' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_downloadFile_button myProfile_downloadFile_button--order">
+                    <i class="material-icons">description</i>Pobierz zamówienie
+                </a>
+            </div>
+            <div class="">
+                <a href='@Url.Action("PobierzFakture", "MojProfil", new { orderID = ViewBag.orderID})' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_downloadFile_button myProfile_downloadFile_button--invoice">
+                    <i class="material-icons">description</i>Pobierz fakturę
+                </a>
+            </div>
+        </div>
+        <div class="offset-md-2 offset-lg-4 col-md-5">
+            <div class="row myProfile_detailsOrder_summary">
+                <p class=" myProfile_detailsOrder_summary_deliver--title ">
+                    Wybrana dostawa
+                </p>
+            </div>
+            <div class="row myProfile_detailsOrder_summary">
+                <p class="myProfile_detailsOrder_summary_deliver--price">
+                    @Html.DisplayFor(model => model.NameDelivery): @Html.DisplayFor(model => model.DeliveryPriceB)
+                </p>
+            </div>
+            <hr class="myProfile_detailsOrder_summary">
+            <div class="row myProfile_detailsOrder_summary">
+                <p class="myProfile_detailsOrder_summary_nettoPrice">
+                    Łącznie (netto): @Html.DisplayFor(model => model.TotalOrderPriceN)
+                </p>
+            </div>
+            <div class="row myProfile_detailsOrder_summary">
+                <p class="myProfile_detailsOrder_summary_bruttoPrice">
+                    Łącznie (brutto): @Html.DisplayFor(model => model.TotalOrderPriceB)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row myProfile_detailsOrder_footer">
+        <div class="auto">
+            <a href='@Url.Action("HistoriaZamowien", "MojProfil")' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_detailsOrder_footer_button">
+                <i class="material-icons materilIcon_button">arrow_back</i>Wróć do historii zamówień
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+
+
+        var t =  $('#example').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "5%" },
+                { "width": "5%" },
+                { "width": "30%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "10%" },
+                { "width": "15%" }
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            "paginate": false,
+            'searching': false,
+            'info': false
+        });
+        t.on('order.dt search.dt', function () {
+            t.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        $('#example1').DataTable({
+            "autoWidth": false,
+            "columns": [
+                { "width": "14%" },
+                { "width": "20%" },
+                { "width": "20%" },
+                { "width": "25%" },
+                { "width": "20%" },
+                { "width": "25%" }
+
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+
+            "paginate": false,
+            'searching': false,
+            'info': false
+        });
+
+
+    });
+</script>
+

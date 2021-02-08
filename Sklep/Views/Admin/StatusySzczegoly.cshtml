@@ -1,0 +1,30 @@
+﻿@model Sklep.Models.db.Statuses
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("StatusyEdycja", "Admin", FormMethod.Post))
+{
+@Html.AntiForgeryToken()
+<table class="table table-hover koszyk2" style="width: 50%;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+            <tr>
+                <td>@Html.DisplayFor(model => model.StatusID)</td>
+                <td>@Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control"} })</td>
+            </tr>
+    </tbody>
+</table>
+    @Html.HiddenFor(model => model.StatusID)
+    <input type="submit" class="btn btn-default" value="Zapisz" />
+}
+<br/>
+<input class="btn btn-default" type="button" value="Usuń status" onclick="location.href='@Url.Action("StatusyUsun", "Admin", new { statusID = Model.StatusID})'" />

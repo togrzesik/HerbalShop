@@ -1,0 +1,132 @@
+﻿@model Sklep.Models.ViewModel.Admin.ScraperDetailsViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("ScraperEdycja", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="admin_addDelivery col-10 offset-md-1">
+        <p class="admin_rightSide_titlePage">Szczegóły scraper - produkt: @Model.ProductID, @Model.LastUpdate</p>
+        <div class="row">
+            <div class="col-10 mx-auto">
+                <div class="row">
+                    <p class="admin_detailsScraper_titleShop col-5">X-kom:</p>
+                    <p class="admin_detailsScraper_list_value admin_detailsScraper_list_value--price col-6">@Html.DisplayFor(model => model.XKomPrice)</p>
+                </div>
+                <div class="offset-3">
+                    @{
+                        if (Model.XKomLinks != null)
+                        {
+                            int counter = 1;
+                            foreach (var item in Model.XKomLinks)
+                            {
+                                <div class="row">
+                                    <a href="@item" class="admin_detailsScraper_list_value col-6">@counter; </a>
+                                </div>
+                                counter++;
+                            }
+                        }
+                    }
+                    </div>
+                    <div class="row">
+                        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Potwierdzony link:</p>
+                        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                            @Html.EditorFor(model => model.XKomLinkChecked, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "XKomLinkChecked", @id = "XKomLinkChecked" } })
+                            <label class="mdl-textfield__label modal_label--underline" for="XKomLinkChecked"></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p class="admin_details_list_label admin_detailsScraper_titleShop col-5">Vobis:</p>
+                        <p class="admin_detailsScraper_list_value admin_detailsScraper_list_value--price col-6">@Html.DisplayFor(model => model.VobisPrice)</p>
+                    </div>
+                    <div class="offset-3">
+                        @{
+                            if (Model.VobisLinks != null)
+                            {
+                                int counter = 1;
+                                foreach (var item in Model.VobisLinks)
+                                {
+                                    <div class="row">
+                                        <a href="@item" class="admin_detailsScraper_list_value col-6">@counter; </a>
+                                    </div>
+                                    counter++;
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="row">
+                        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Potwierdzony link:</p>
+                        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                            @Html.EditorFor(model => model.VobisLinkChecked, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "VobisLinkChecked", @id = "VobisLinkChecked" } })
+                            <label class="mdl-textfield__label modal_label--underline" for="VobisLinkChecked"></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p class="admin_detailsScraper_titleShop col-5">Alsen:</p>
+                        <p class="admin_detailsScraper_list_value admin_detailsScraper_list_value--price col-6">@Html.DisplayFor(model => model.AlsenPrice)</p>
+                    </div>
+                    <div class="offset-3">
+                        @{
+                            if (Model.AlsenLinks != null)
+                            {
+                                int counter = 1;
+                                foreach (var item in Model.AlsenLinks)
+                                {
+                                    <div class="row">
+                                        <a href="@item" class="admin_detailsScraper_list_value col-6">@counter; </a>
+                                    </div>
+                                    counter++;
+                                }
+                            }
+                        }
+                    </div>
+                    <div class="row">
+                        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Potwierdzony link:</p>
+                        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                            @Html.EditorFor(model => model.AlsenLinkChecked, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "AlsenLinkChecked", @id = "AlsenLinkChecked" } })
+                            <label class="mdl-textfield__label modal_label--underline" for="AlsenLinkChecked"></label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p class="admin_detailsScraper_titleShop col-5">Ceneo:</p>
+                        <p class="admin_detailsScraper_list_value admin_detailsScraper_list_value--price col-6">@Html.DisplayFor(model => model.CeneoPrice)</p>
+                    </div>
+                    <div class="offset-3">
+                        @{
+                            if (Model.CeneoLinks != null)
+                            {
+                                int counter = 1;
+                                foreach (var item in Model.CeneoLinks)
+                                {
+                                    <a href="@item" class="admin_detailsScraper_list_value  col-2">@counter; </a>
+                                    counter++;
+
+                                }
+                            }
+                        }
+                    </div>
+
+                    <div class="row">
+                        <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Potwierdzony link:</p>
+                        <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                            @Html.EditorFor(model => model.CeneoLinkChecked, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "CeneoLinkChecked", @id = "CeneoLinkChecked" } })
+                            <label class="mdl-textfield__label modal_label--underline" for="CeneoLinkChecked"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button mx-auto col-10 col-md-4 ">Zapisz</button>
+                    </div>
+
+                </div>
+        </div>
+    </div>
+    @Html.HiddenFor(model => model.ProductID)
+}

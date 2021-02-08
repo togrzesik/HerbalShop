@@ -1,0 +1,52 @@
+﻿@model Sklep.Models.ViewModel.Admin.MonitorDetailsViewModel
+
+
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">1:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.ScreenSize, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "1", @id = "ScreenSize" } })
+        <label class="mdl-textfield__label modal_label--underline" for="ScreenSize"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">2:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Resolution, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "2", @id = "Resolution" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Resolution"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">3:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.AspectRatio, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "3", @id = "AspectRatio" } })
+        <label class="mdl-textfield__label modal_label--underline" for="AspectRatio"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">4:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Layer, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "4", @id = "Layer" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Layer"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">5:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.PanelType, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "5", @id = "PanelType" } })
+        <label class="mdl-textfield__label modal_label--underline" for="PanelType"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">6:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.PowerConsumption, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "6", @id = "PowerConsumption" } })
+        <label class="mdl-textfield__label modal_label--underline" for="PowerConsumption"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">7:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Output, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "7", @id = "Output" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Output"></label>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+﻿
+<!DOCTYPE html>
+@{
+
+}
+
+
+
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+          crossorigin="anonymous">
+    <link href="~/CSS/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/CSS/material.css">
+    <script src="~/Scripts/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script type="text/javascript" src="~/Scripts/jquery.dataTables.js"></script>
+    <link href="~/CSS/base.css" rel="stylesheet" />
+
+</head>
+@{
+    if (@ViewBag.is_Admin == "False")
+    {
+        Response.Redirect(@Url.Action("Index", "Home"));
+    }
+}
+<body>
+    <div class="container-fluid container--admin">
+        <div class="row">
+            <div class="admin_leftSide  col-md-2 ">
+                <ul class="list-unstyled admin_leftSide_list">
+                    <li class="admin_leftSide_list_title">
+                        <a href="@Url.Action("Index", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_leftSide_list_button admin_leftSide_list_buttonFirst">
+                            Panel administracyjny
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="@Url.Action("ZamowieniaDoRealizacji", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Zamówienia do realizacji
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("ZamowieniaWszystkie", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Wszystkie zamówienia
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Produkty", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Produkty
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="@Url.Action("Klienci", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Klienci
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Komentarze", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Komentarze
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Dostawy", "Admin")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Dostawa
+                        </a>
+
+                    </li>
+                    <li class="">
+                        <a href="@Url.Action("Index", "Home")" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect  admin_leftSide_list_button admin_leftSide_list_buttonOther">
+                            Powrót do sklepu
+                        </a>
+
+                    </li>
+                </ul>
+            </div>
+            <div class="container--admin_rightSide col-md-10">
+                @RenderBody()
+            </div>
+            
+        </div>
+    </div>
+
+
+  
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
+
+</body>
+
+
+</html>

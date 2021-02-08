@@ -1,0 +1,250 @@
+﻿@model Sklep.Models.ViewModel.ChangeDataInMyProfileViewModel
+
+@{
+    ViewBag.Title = "Mój profil";
+    Layout = "~/Views/Shared/LayoutNotLogged.cshtml";
+}
+<title>Mój profil</title>
+<div class="container containerStore container--myProfile">
+    <div class="row">
+        <div class="col-xs-8 col-sm-3 col-md-3 offset-lg-1 col-lg-2 myProfile_listLinks">
+            <div class="list-group">
+                <a href='@Url.Action("Index", "MojProfil")' class="list-group-item list-group-item-action active mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent myProfile_listLinks_link">
+                    Mój profil
+                </a>
+                <a href='@Url.Action("BiezaceZamowienia", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Bieżące zamówienia
+                </a>
+                <a href='@Url.Action("HistoriaZamowien", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Historia zamówień
+                </a>
+                <a href='@Url.Action("UsunKonto", "MojProfil")' class="list-group-item list-group-item-action mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect myProfile_listLinks_link">
+                    Usuń konto
+                </a>
+            </div>
+        </div>
+
+        @using (Html.BeginForm("ZmienDanePersonalne", "MojProfil", FormMethod.Post, new { @class = "col-sm-8 col-lg-7 offset-sm-1 offset-lg-1" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card card_myProfile">
+                <div class="card-body">
+                    <div class="card-title card_myProfile_title">Dane personalne</div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changePersonalDataViewModel.Name, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changePersonalDataViewModel.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "name", @placeholder = "Imię" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="name"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changePersonalDataViewModel.Surname, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changePersonalDataViewModel.Surname, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "surname", @placeholder = "Nazwisko" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="surname"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 col-lg-4 card_myProfile_inputLabel--title">Numer telefonu (opcjonalnie):</div>
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            <input class="mdl-textfield__input modal_input col-9" type="text" id="numberPhone" placeholder="Numer telefonu (opcjonalnie)">
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="numberPhone"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-3 offset-md-5 offset-lg-4 card_myProfile_colButton">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect card_myProfile_button" type="submit">Zmień dane personalne</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        @using (Html.BeginForm("ZmienAdresWysylkowy", "MojProfil", FormMethod.Post, new { @class = "col-sm-8 offset-sm-4 col-lg-7" }))
+        {
+            @Html.AntiForgeryToken()
+           
+           
+            <div class="card card_myProfile">
+                <div class="card-body">
+                    <div class="card-title card_myProfile_title">Adres do wysyłki</div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.deliveryAddressViewModel.Street, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.deliveryAddressViewModel.Street, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "street", @placeholder = "Ulica" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="street"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        @Html.LabelFor(model => model.deliveryAddressViewModel.NumOfHouse, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.deliveryAddressViewModel.NumOfHouse, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "numOfHouse", @placeholder = "Numer domu/lokalu" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="numOfHouse"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        @Html.LabelFor(model => model.deliveryAddressViewModel.PostCode, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.deliveryAddressViewModel.PostCode, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "postCode", @placeholder = "Kod pocztowy" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="postCode"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.deliveryAddressViewModel.City, new { @class = "col-md-5  col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.deliveryAddressViewModel.City, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "text", @id = "City", @placeholder = "Miejscowość" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="City"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(model => model.deliveryAddressViewModel.Name)
+                    @Html.HiddenFor(model => model.deliveryAddressViewModel.Surname)
+                    <div class="row">
+                        <div class="offset-3 offset-md-5 offset-lg-4 card_myProfile_colButton">
+                            <button class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect card_myProfile_button" type="submit">Zmień adres do wysyłki</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+        @using (Html.BeginForm("ZmienHaslo", "MojProfil", FormMethod.Post, new { @class = "col-sm-8 offset-sm-4 col-lg-7" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card card_myProfile">
+                <div class="card-body">
+                    <div class="card-title card_myProfile_title">Hasło</div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changePasswordViewModel.ActualPassword, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changePasswordViewModel.ActualPassword, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @id = "aPass", @type = "password", @placeholder = "Aktualne hasło" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="aPass"></label>
+                            <span class="mdl-textfield__error modal_error" id="validAPass"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changePasswordViewModel.NewPassword, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changePasswordViewModel.NewPassword, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @id = "nPass", @type = "password", @placeholder = "Nowe hasło" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="nPass"></label>
+                            <span class="mdl-textfield__error modal_error" id="validNPass"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changePasswordViewModel.NewPassword1, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changePasswordViewModel.NewPassword1, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @id = "rPass", @type = "password", @placeholder = "Powtórz hasło" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="rPass"></label>
+                            <span class="mdl-textfield__error modal_error" id="validRPass"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-3 offset-md-5 offset-lg-4 card_myProfile_colButton">
+                            <button class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect card_myProfile_button" type="submit">Zmień hasło</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+        @using (Html.BeginForm("ZmienEmail", "MojProfil", FormMethod.Post, new { @class = "col-sm-8 offset-sm-4 col-lg-7" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="card card_myProfile">
+                <div class="card-body">
+                    <div class="card-title card_myProfile_title">Adres e-mail</div>
+                    <div class="row">
+                        @Html.LabelFor(model => model.changeEmailViewModel.Email, new { @class = "col-md-5 col-lg-4 card_myProfile_inputLabel--title" })
+                        <div class="mdl-textfield mdl-js-textfield col-xs-6 col-md-7 col-lg-8  form-inline">
+                            @Html.EditorFor(model => model.changeEmailViewModel.Email, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input col-9", @type = "email", @id = "email", @placeholder = "E-mail" } })
+                            <label class="mdl-textfield__label modal_label--underline col-9" for="email"></label>
+                            <span class="mdl-textfield__error modal_error"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-3 offset-md-5 offset-lg-4 card_myProfile_colButton">
+                            <button class=" mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect card_myProfile_button" type="submit">Zmień adres e-mail</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
+
+
+
+@{ if (ViewBag.display == "1")
+    {
+        <div id="myModal" class="modal fade modal_result" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p class="modal-title modal_result_title">@ViewBag.titleModal</p>
+                    </div>
+                    <div class="modal-body">
+                        <p class="modal_result_content">@ViewBag.contentModal</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect modal_result_button" data-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+<script>
+
+    $(function () {
+
+        $("#myModal").modal({
+        });
+
+    });
+    var inputNewPass = document.querySelector('input[id=nPass]');
+    inputNewPass.addEventListener('input', function () {
+        var pattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,200}/;
+        if (inputNewPass.value.length == 0) {
+            document.getElementById("validNPass").innerHTML = "";
+            return;
+        }
+        if (pattern.test(inputNewPass.value)) {
+            document.getElementById("validNPass").innerHTML = "";
+        } else {
+            document.getElementById("validNPass").innerHTML = "Hasło musi liczyć od 8 do 200 znaków oraz składać się z conajmniej jednej wielkiej litery, jednej małej litery oraz cyfry";
+        }
+    });
+
+    var inputRPass = document.querySelector('input[id=rPass]');
+    inputRPass.addEventListener('input', function () {
+        document.getElementById("validRPass").innerHTML = "Hasła nie są identyczne";
+        if (inputRPass.value.length == 0) {
+            document.getElementById("validRPass").innerHTML = "";
+            return;
+        }
+
+        if (inputNewPass.value == inputRPass.value) {
+            document.getElementById("validRPass").innerHTML = "";
+        } else {
+            document.getElementById("validRPass").innerHTML = "Hasła nie są identyczne";
+        }
+    });
+</script>

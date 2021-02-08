@@ -1,0 +1,51 @@
+﻿@model Sklep.Models.ViewModel.Admin.ProcessorDetailsViewModel
+
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">1:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.ProcessorModel, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "1", @id = "ProcessorModel" } })
+        <label class="mdl-textfield__label modal_label--underline" for="ProcessorModel"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">2:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "2", @id = "Frequency" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Frequency"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">3:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.ProcessorGraphics, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "3", @id = "ProcessorGraphics" } })
+        <label class="mdl-textfield__label modal_label--underline" for="ProcessorGraphics"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">4:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Socket, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "4", @id = "Socket" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Socket"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">5:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.AmountCores, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "5", @id = "AmountCores" } })
+        <label class="mdl-textfield__label modal_label--underline" for="AmountCores"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">6:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.AmountThreads, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "6", @id = "AmountThreads" } })
+        <label class="mdl-textfield__label modal_label--underline" for="OldPriceN"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">7:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Cached, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "7", @id = "Cached" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Cached"></label>
+    </div>
+</div>

@@ -1,0 +1,997 @@
+﻿@model Sklep.Models.ViewModel.Admin.ProductViewModel
+@{
+    ViewBag.Title = "Panel administratora";
+    Layout = "~/Views/Shared/LayoutAdministration.cshtml";
+}
+
+<div class="admin_addDelivery col-10 offset-md-1">
+    <p class="admin_rightSide_titlePage">Dodaj produkt</p>
+    <div class="row">
+        <div class="col-10">
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Nazwa produktu:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Nazwa produktu", @id = "ProductName" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="ProductName"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validName"></span>
+                
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Producent:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.CodeProduct, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Producent", @id = "CodeProduct" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="CodeProduct"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validCode"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena przed promocją (netto):</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.OldPriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena przed promocją (netto)", @id = "OldPriceN" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="OldPriceN"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validOldPriceN"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Cena (netto):</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.PriceN, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Cena (netto)", @id = "PriceN" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="PriceN"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validPriceN"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">VAT:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.VAT, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "VAT", @id = "VAT", @min = "0", @max = "1" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="VAT"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validVAT"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Kategoria:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.DropDownListFor(model => model.CategoryID, ViewBag.categoryList as IEnumerable<SelectListItem>, new { @class = "form-control", @id = "categorySelected" })
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validCategory"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Ilość:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input", @placeholder = "Ilość", @id = "Quantity" } })
+                    <label class="mdl-textfield__label modal_label--underline" for="Quantity"></label>
+                </div>
+                <span class="field-validation-valid text-danger admin_addProduct_dangerText offset-1 col-11 offset-md-5 col-md-6" id="validQuantity"></span>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Polecany:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6 modal_container_checkbox  form-inline">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="Recommended">
+                        @Html.EditorFor(model => model.Recommended, new { htmlAttributes = new { @id = "Recommended", @class = "mdl-checkbox__input" } })
+                        <span class="mdl-checkbox__label modal_container_checkbox"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Wyświetlany:</p>
+                <div class="mdl-textfield mdl-js-textfield col-6 modal_container_checkbox  form-inline">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="IsShowed">
+                        @Html.EditorFor(model => model.IsShowed, new { htmlAttributes = new { @id = "IsShowed", @class = "mdl-checkbox__input" } })
+                        <span class="mdl-checkbox__label modal_container_checkbox"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Opis:</p>
+                <div class="mdl-textfield mdl-js-textfield  col-sm-7">
+                    @Html.TextAreaFor(model => model.Description, new { @class = "mdl-textfield__input contact_input", @rows = "12", @id = "Description", @placeholder = "Opis produktu" })
+                    <label class="mdl-textfield__label contact_input" for="Description"></label>
+                </div>
+            </div>
+            <div class="admin_addProduct_specification" id="Specyfication">
+
+            </div>
+
+
+            <div class="row uploadImage_container_button">
+                <div class="col-md-6">
+                    <input type="file" id="files" name="files" onchange="loadFile(event, 0)" />
+                </div>
+                <div class="col-md-6">
+                    <input type="file" id="files1" name="files1" onchange="loadFile(event, 1)" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class=" uploadImage_image" id="imagesUpload0"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="img-responsive" id="imagesUpload1"></div>
+                </div>
+            </div>
+            <div class="row uploadImage_container_button">
+                <div class="col-md-6">
+                    <input type="file" id="files2" name="files2" onchange="loadFile(event, 2)" />
+                </div>
+                <div class="col-md-6">
+                    <input type="file" id="files3" name="files3" onchange="loadFile(event, 3)" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="img-responsive imgLogo" id="imagesUpload2"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="img-responsive imgLogo" id="imagesUpload3"></div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <button type="submit" id="ButtonSave" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect admin_deliveries_button  admin_addProduct_button mx-auto col-12 col-md-4 ">Dodaj produkt</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    var loadFile = function (event, number) {
+        $("#imagesUpload" + number).text("");
+        var files = event.target.files;
+
+        for (var i = 0; i < files.length; i++) {
+            $("#imagesUpload" + number).append('<img src="' + URL.createObjectURL(event.target.files[i]) + '" class="addPicture img-responsive" style="width:100%">');
+        }
+    }
+
+    function addImages(id) {
+        if (window.FormData !== undefined) {
+
+            var fileUpload = $("#files").get(0);
+            var fileUpload1 = $("#files1").get(0);
+            var fileUpload2 = $("#files2").get(0);
+            var fileUpload3 = $("#files3").get(0);
+
+            var files = fileUpload.files;
+            var files1 = fileUpload1.files;
+            var files2 = fileUpload2.files;
+            var files3 = fileUpload3.files;
+            // Create FormData object
+            var fileData = new FormData();
+
+            if (files.length > 0)
+                fileData.append(files[0].name, files[0]);
+            if (files1.length > 0)
+                fileData.append(files1[0].name, files1[0]);
+            if (files2.length > 0)
+                fileData.append(files2[0].name, files2[0]);
+            if (files3.length > 0)
+                fileData.append(files3[0].name, files3[0]);
+
+            fileData.append("productID", id);
+
+            $.ajax({
+                url: '/Admin/UploadImages',
+                type: "POST",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (result) {
+                    alert("Produkt został dodany.");
+                },
+                error: function (err) {
+                    alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+                }
+            });
+        } else {
+            alert("Błąd dodania produktu.");
+        }
+    }
+
+    $(function () {
+        var categorySelected = $('[id*=categorySelected]').val();
+
+
+        $('[id*=categorySelected]').on("change", function () {
+            var categorySelected = $('[id*=categorySelected]').val();
+
+            switch (categorySelected) {
+                case "0":
+                    document.getElementById("Specyfication").innerHTML = "";
+                    return;
+                case "5":
+                    $('#Specyfication').load('@Url.Action("LaptopDetails","Admin")');
+                    break;
+                case "6":
+                    $('#Specyfication').load('@Url.Action("ProcessorDetails","Admin")');
+                    break;
+                case "7":
+                    $('#Specyfication').load('@Url.Action("GraphicsCardDetails","Admin")');
+                    break;
+                case "8":
+                    $('#Specyfication').load('@Url.Action("MonitorDetails", "Admin")');
+                    break;
+                    case "9":
+                    $('#Specyfication').load('@Url.Action("RAMMemoryDetails", "Admin")');
+                    break;
+                    case "10":
+                    $('#Specyfication').load('@Url.Action("LaptopDetails", "Admin")');
+                    break;
+                    case "11":
+                    $('#Specyfication').load('@Url.Action("OperatingSystemDetails", "Admin")');
+                    break;
+                    case "12":
+                    $('#Specyfication').load('@Url.Action("AntivirusDetails", "Admin")');
+                    break;
+                    case "13":
+                    $('#Specyfication').load('@Url.Action("AntivirusDetails", "Admin")');
+                    break;
+                    case "14":
+                    $('#Specyfication').load('@Url.Action("MouseDetails", "Admin")');
+                    break;
+                    case "15":
+                    $('#Specyfication').load('@Url.Action("KeyboardsDetails", "Admin")');
+                    break;
+                    case "16":
+                    $('#Specyfication').load('@Url.Action("HeadphonesDetails", "Admin")');
+                    break;
+                    case "17":
+                    $('#Specyfication').load('@Url.Action("SpeakersDetails", "Admin")');
+                    break;
+                    case "18":
+                    $('#Specyfication').load('@Url.Action("ExternalHardDriveDetails", "Admin")');
+                    break;
+                    case "19":
+                    $('#Specyfication').load('@Url.Action("MotherboardsDetails", "Admin")');
+                    break;
+                default:
+                    document.getElementById("Specyfication").innerHTML = "";
+                    return;
+            }
+        });
+
+        $("#ButtonSave").click(function () {
+            var productName = document.getElementById("ProductName").value
+            var codeProduct = document.getElementById("CodeProduct").value
+            var oldPriceN = document.getElementById("OldPriceN").value;
+            var priceN = document.getElementById("PriceN").value;
+            var VAT = document.getElementById("VAT").value;
+            var categoryID = $('[id*=categorySelected]').val();
+            var description = document.getElementById("Description").value;
+            var quantity = document.getElementById("Quantity").value;
+            var recommended = document.getElementById("Recommended").checked;
+            var isShowed = document.getElementById("IsShowed").checked;
+            if (productName.length < 3) {
+                document.getElementById("validName").innerHTML = "Nazwa produktu musi liczyć minimum 3 znaki";
+                return;
+            }
+            else
+                document.getElementById("validName").innerHTML = "";
+
+            if (priceN.includes(",")) {
+                document.getElementById("validPriceN").innerHTML = "Podano zły format ceny";
+                return;
+            }
+            else
+                document.getElementById("validPriceN").innerHTML = "";
+
+
+
+
+            priceN = parseFloat(document.getElementById("PriceN").value).toFixed(2);
+            if (priceN < 0 || isNaN(priceN)) {
+                document.getElementById("validPriceN").innerHTML = "Podano zły format ceny";
+                return;
+            }
+            else {
+                document.getElementById("validPriceN").innerHTML = "";
+
+                oldPriceN = parseFloat(document.getElementById("OldPriceN").value).toFixed(2);
+                if (oldPriceN < 0)
+                {
+                    document.getElementById("validPriceN").innerHTML = "Stara cena nie może być ujemna";
+                    return;
+                }
+                if (oldPriceN < priceN || oldPriceN == priceN) {
+                    document.getElementById("validPriceN").innerHTML = "Nowa cena nie może być niższa lub równa od starej ceny";
+                    return;
+                }
+            }
+
+            console.log("cena " + oldPriceN);
+            if (VAT.includes(",")) {
+                document.getElementById("validVAT").innerHTML = "Podano zły format VAT";
+                return;
+            }
+            else
+                document.getElementById("validVAT").innerHTML = "";
+
+            VAT = parseFloat(document.getElementById("VAT").value).toFixed(2);
+            if (VAT < 0 || isNaN(VAT)) {
+                document.getElementById("validVAT").innerHTML = "Podano zły format VAT";
+                return;
+            }
+            else
+                document.getElementById("validVAT").innerHTML = "";
+
+            if (categoryID == "0") {
+                document.getElementById("validCategory").innerHTML = "Wybierz kategorie";
+                return;
+            }
+            else
+                document.getElementById("validCategory").innerHTML = "";
+
+            if (quantity < 0 || isNaN(quantity)) {
+                document.getElementById("validQuantity").innerHTML = "Pole ilość nie może być puste i ujemne";
+                return;
+            }
+            if (categoryID == "5" || categoryID == "10") {
+                var processor = document.getElementById("Processor").value;
+                var graphicCard = document.getElementById("GraphicCard").value;
+                var RAMSize = document.getElementById("RAMSize").value;
+                var HDDSize = document.getElementById("HDDSize").value;
+                var SSDSize = document.getElementById("SSDSize").value;
+                var opticalDrive = document.getElementById("OpticalDrive").value;
+                var displayResolution = document.getElementById("DisplayResolution").value;
+                var displaySize = document.getElementById("DisplaySize").value;
+                var color = document.getElementById("Color").value;
+                var battery = document.getElementById("Battery").value;
+                var weight = document.getElementById("Weight").value;
+                var operatingSystem = document.getElementById("OperatingSystem").value;
+                var otherSpec = document.getElementById("OtherSpec").value;
+
+                $.post("/Admin/AddLaptop",
+                    {
+                        Processor: processor,
+                        GraphicCard: graphicCard,
+                        RAMSize: RAMSize,
+                        HDDSize: HDDSize,
+                        SSDSize: SSDSize,
+                        OpticalDrive: opticalDrive,
+                        DisplayResolution: displayResolution,
+                        DisplaySize: displaySize,
+                        Color: color,
+                        Battery: battery,
+                        Weight: weight,
+                        OperatingSystem: operatingSystem,
+                        OtherSpec: otherSpec,
+
+                        ProductName: productName,
+                        CodeProduct: codeProduct,
+                        CategoryID: categoryID,
+                        OldPriceN: oldPriceN,
+                        PriceN: priceN,
+                        VAT: VAT,
+                        Description: description,
+                        Quantity: quantity,
+                        Recommended: recommended,
+                        IsShowed: isShowed
+
+
+                    })
+
+                   .done(function (data) {
+                       console.log("odpowiedz");
+                       console.log("trssc: " + data);
+                       if (data == "-1"){
+                           alert("Produkt o podanej nazwie już istnieje.");
+                           return;
+                       }
+                       if (data == "-2"){
+                           alert("Produkt o podanym kodzie już istnieje.");
+                           return;
+                       }
+                       addImages(data);
+                   })
+                   .fail(function () {
+                       alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+                   });
+               //window.location.href = "/Admin/Produkty"
+            }
+            if (categoryID == "6") {
+                var processorModel = document.getElementById("ProcessorModel").value;
+                var socket = document.getElementById("Socket").value;
+                var frequency = document.getElementById("Frequency").value;
+                var amountCores = document.getElementById("AmountCores").value;
+                var amountThreads = document.getElementById("AmountThreads").value;
+                var processorGraphics = document.getElementById("ProcessorGraphics").value;
+                var cached = document.getElementById("Cached").value;
+                console.log("weszlo 7");
+
+                $.post("/Admin/AddGraphicsCard",
+                    {
+                        ProcessorModel: processorModel,
+                        Socket: socket,
+                        Frequency: frequency,
+                        FrequencyCore: frequencyCore,
+                        AmountThreads: amountThreads,
+                        ProcessorGraphics: processorGraphics,
+                        Cached: cached,
+
+                        ProductName: productName,
+                        CodeProduct: codeProduct,
+                        CategoryID: categoryID,
+                        OldPriceN: oldPriceN,
+                        PriceN: priceN,
+                        VAT: VAT,
+                        Description: description,
+                        Quantity: quantity,
+                        Recommended: recommended,
+                        IsShowed: isShowed
+
+
+                    })
+
+                    .done(function (data) {
+                        console.log("odpowiedz");
+                        console.log("trssc: " + data);
+                        if (data == "-1") {
+                            alert("Produkt o podanej nazwie już istnieje.");
+                            return;
+                        }
+                        if (data == "-2") {
+                            alert("Produkt o podanym kodzie już istnieje.");
+                            return;
+                        }
+                        addImages(data);
+                    })
+                    .fail(function () {
+                        alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+                    });
+                //window.location.href = "/Admin/Produkty"
+            }
+
+    if (categoryID == "7") {
+        var memorySize = document.getElementById("MemorySize").value;
+        var frequencyMemory = document.getElementById("FrequencyMemory").value;
+        var kindOfMemory = document.getElementById("KindOfMemory").value;
+        var memoryBus = document.getElementById("MemoryBus").value;
+        var frequencyCore = document.getElementById("FrequencyCore").value;
+        var output = document.getElementById("Output").value;
+        var powerConsumption = document.getElementById("PowerConsumption").value;
+                console.log("weszlo 7");
+
+                $.post("/Admin/AddGraphicsCard",
+                    {
+                        MemorySize: memorySize,
+                        FrequencyMemory: frequencyMemory,
+                        KindOfMemory: kindOfMemory,
+                        MemoryBus: memoryBus,
+                        FrequencyCore: frequencyCore,
+                        Output: output,
+                        PowerConsumption: powerConsumption,
+
+
+                        ProductName: productName,
+                        CodeProduct: codeProduct,
+                        CategoryID: categoryID,
+                        OldPriceN: oldPriceN,
+                        PriceN: priceN,
+                        VAT: VAT,
+                        Description: description,
+                        Quantity: quantity,
+                        Recommended: recommended,
+                        IsShowed: isShowed
+
+
+                    })
+
+                   .done(function (data) {
+                       console.log("odpowiedz");
+                       console.log("trssc: " + data);
+                       if (data == "-1"){
+                           alert("Produkt o podanej nazwie już istnieje.");
+                           return;
+                       }
+                       if (data == "-2"){
+                           alert("Produkt o podanym kodzie już istnieje.");
+                           return;
+                       }
+                       addImages(data);
+                   })
+                   .fail(function () {
+                       alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+                   });
+               //window.location.href = "/Admin/Produkty"
+            }
+
+    if (categoryID == "8") {
+        var screenSize = document.getElementById("ScreenSize").value;
+        var resolution = document.getElementById("Resolution").value;
+        var aspectRatio = document.getElementById("AspectRatio").value;
+        var layer = document.getElementById("Layer").value;
+        var panelType = document.getElementById("PanelType").value;
+        var powerConsumption = document.getElementById("PowerConsumption").value;
+        var output = document.getElementById("Output").value;
+        
+
+        $.post("/Admin/AddMonitor",
+            {
+                ScreenSize: screenSize,
+                Resolution: resolution,
+                AspectRatio: aspectRatio,
+                Layer: layer,
+                PanelType: panelType,
+                PowerConsumption: powerConsumption,
+                Output: output,
+
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+
+
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "9") {
+        var typeOfMemory = document.getElementById("TypeOfMemory").value;
+        var capacity = document.getElementById("Capacity").value;
+        var frequency = document.getElementById("Frequency").value;
+        var cycleLatency = document.getElementById("CycleLatency").value;
+        var volatage = document.getElementById("Voltage").value;
+
+        $.post("/Admin/AddMemoryRAM",
+            {
+                TypeOfMemory: typeOfMemory,
+                Capacity: capacity,
+                Frequency: frequency,
+                CycleLatency: cycleLatency,
+                Voltage: volatage,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+
+
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "11") {     
+        var architecture = document.getElementById("Architecture").value;
+        var license = document.getElementById("License").value;
+        var numOfUser = document.getElementById("NumOfUser").value;
+        var numOfComputer = document.getElementById("NumOfComputer").value;
+        var language = document.getElementById("Language").value;
+        
+        $.post("/Admin/AddOperatingSystem",
+            {
+                Architecture: architecture,
+                License: license,
+                NumOfUser: numOfUser,
+                NumOfComputer: numOfComputer,
+                Language: language,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "12" || categoryID == "13") {
+        var architecture = document.getElementById("Architecture").value;
+        var license = document.getElementById("License").value;
+        var numOfUser = document.getElementById("NumOfUser").value;
+        var numOfComputer = document.getElementById("NumOfComputer").value;
+        var language = document.getElementById("Language").value;
+        var platform = document.getElementById("Platform").value;
+        console.log("co to " + architecture);
+        console.log("co to l" + license);
+        console.log("co to u" + numOfUser);
+        console.log("co to c" + numOfComputer);
+        console.log("co to l" + language);
+        console.log("co to p" + platform);
+        $.post("/Admin/AddAntivirus",
+            {
+                Architecture: architecture,
+                License: license,
+                NumOfUser: numOfUser,
+                NumOfComputer: numOfComputer,
+                Language: language,
+                Platform: platform,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "14") {
+        var typeOfMouse = document.getElementById("TypeOfMouse").value;
+        var sensor = document.getElementById("Sensor").value;
+        var resolution = document.getElementById("Resolution").value;
+        var numOfKeys = document.getElementById("NumOfKeys").value;
+        var interface = document.getElementById("Interface").value;
+        var lengthCable = document.getElementById("LengthCable").value;
+        $.post("/Admin/AddMouse",
+            {
+                TypeOfMouse: typeOfMouse,
+                Sensor: sensor,
+                Resolution: resolution,
+                NumOfKeys: numOfKeys,
+                Interface: interface,
+                LengthCable: lengthCable,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "15") {
+        var typeOfKeyboard = document.getElementById("TypeOfKeyboard").value;
+        var backlight = document.getElementById("Backlight").value;
+        var touchpad = document.getElementById("Touchpad").value;
+        var color = document.getElementById("Color").value;
+        var interface = document.getElementById("Interface").value;
+        var lengthCable = document.getElementById("LengthCable").value;
+        $.post("/Admin/AddKeyboard",
+            {
+                TypeOfKeyboard: typeOfKeyboard,
+                Backlight: backlight,
+                Touchpad: touchpad,
+                Color: color,
+                Interface: interface,
+                LengthCable: lengthCable,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+    if (categoryID == "16") {
+        var typeOfHeadphones = document.getElementById("TypeOfHeadphones").value;
+        var sensitivity = document.getElementById("Sensitivity").value;
+        var microphone = document.getElementById("Microphone").value;
+        var color = document.getElementById("Color").value;
+        var interface = document.getElementById("Interface").value;
+        var lengthCable = document.getElementById("LengthCable").value;
+        $.post("/Admin/AddHeadphones",
+            {
+                TypeOfHeadphones: typeOfHeadphones,
+                Sensitivity: sensitivity,
+                Microphone: microphone,
+                Color: color,
+                Interface: interface,
+                LengthCable: lengthCable,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+    if (categoryID == "17") {
+        var typeOfSpeakers = document.getElementById("TypeOfSepakers").value;
+        var power = document.getElementById("Power").value;
+        var microphone = document.getElementById("Microphone").value;
+        var color = document.getElementById("Color").value;
+        var interface = document.getElementById("Interface").value;
+        var lengthCable = document.getElementById("LengthCable").value;
+        $.post("/Admin/AddSpeakers",
+            {
+                TypeOfSpeakers: typeOfSpeakers,
+                Power: power,
+                Microphone: microphone,
+                Color: color,
+                Interface: interface,
+                LengthCable: lengthCable,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+    if (categoryID == "18") {
+        var typeOfDrive = document.getElementById("TypeOfDrive").value;
+        var capacity = document.getElementById("Capacity").value;
+        var size = document.getElementById("Size").value;
+        var color = document.getElementById("Color").value;
+        var interface = document.getElementById("Interface").value;
+        var waterproof = document.getElementById("Waterproof").value;
+        $.post("/Admin/AddExternalHardDrive",
+            {
+                TypeOfDrive: typeOfDrive,
+                Capacity: capacity,
+                Size: size,
+                Color: color,
+                Interface: interface,
+                Waterproof: waterproof,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+                if (data == "-2") {
+                    alert("Produkt o podanym kodzie już istnieje.");
+                    return;
+                }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+
+    if (categoryID == "19") {
+        var standard = document.getElementById("Standard").value;
+        var chipset = document.getElementById("Chipset").value;
+        var socket = document.getElementById("Socket").value;
+        var maksimumNumOfProcessors = document.getElementById("MaksimumNumOfProcessors").value;
+        var kindOfMemoryRAM = document.getElementById("KindOfMemoryRAM").value;
+        var numOfSlotsMemoryRAM = document.getElementById("NumOfSlotsMemoryRAM").value;
+        var maksimumCapaticyMemoryRAM = document.getElementById("MaksimumCapaticyMemoryRAM").value;
+        var integratedGraphicsCard = document.getElementById("IntegratedGraphicsCard").value;
+        var soundChipset = document.getElementById("SoundChipset").value;
+        var integratedNetworkCard = document.getElementById("IntegratedNetworkCard").value;
+        var output = document.getElementById("Output").value;
+        $.post("/Admin/AddMotherboards",
+            {
+                Standard: standard,
+                Chipset: chipset,
+                Socket: socket,
+                MaksimumNumOfProcessors: maksimumNumOfProcessors,
+                KindOfMemoryRAM: kindOfMemoryRAM,
+                NumOfSlotsMemoryRAM: numOfSlotsMemoryRAM,
+                MaksimumCapaticyMemoryRAM: maksimumCapaticyMemoryRAM,
+                IntegratedGraphicsCard: integratedGraphicsCard,
+                SoundChipset: soundChipset,
+                IntegratedNetworkCard: integratedNetworkCard,
+                Output: output,
+
+                ProductName: productName,
+                CodeProduct: codeProduct,
+                CategoryID: categoryID,
+                OldPriceN: oldPriceN,
+                PriceN: priceN,
+                VAT: VAT,
+                Description: description,
+                Quantity: quantity,
+                Recommended: recommended,
+                IsShowed: isShowed
+            })
+
+            .done(function (data) {
+                console.log("odpowiedz");
+                console.log("trssc: " + data);
+                if (data == "-1") {
+                    alert("Produkt o podanej nazwie już istnieje.");
+                    return;
+                }
+             //   if (data == "-2") {
+               //     alert("Produkt o podanym kodzie już istnieje.");
+               //     return;
+             //   }
+                addImages(data);
+            })
+            .fail(function () {
+                alert("Błąd dodawania produktu. Proszę spróbować ponownie.");
+            });
+        //window.location.href = "/Admin/Produkty"
+    }
+        });
+    });
+
+
+</script>

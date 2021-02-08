@@ -1,0 +1,567 @@
+.col1{
+    background: red;
+}
+
+.col3{
+    background: green;
+}
+
+.col4{
+    background: purple;
+}
+@media (max-width: 575px) { 
+    #whitePage{
+        margin-top: 200px;
+    }
+   
+    #shoppingCart{
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+    .dropdownContentCategory{
+        width: 90% !important;
+        left: 5% !important;
+    }
+    .col2{
+        background: blue;
+    
+    }
+    #searchForm
+    {
+        display: block;
+    }
+
+    
+    .productRecommendedPrice {
+        margin-left: 30%;
+    }
+    .productRecommendedPriceNew {
+        margin-left: 0;
+    }
+    .addToCartButton{
+        margin-left: 35% !important;
+    }
+    .productBestsellerPrice{
+        margin-left: 35% !important;
+    }
+    .productBestsellerPriceNew{
+        margin-left: 0 !important;
+    }
+    .addToCartButtonBestseller{
+        margin-left: 35% !important;
+    }
+    .addToListWishesButtonBestseller{
+        margin-left: 0% !important;
+    }
+ }
+
+
+@media (min-width: 576px) and (max-width: 767px) { 
+    #whitePage{
+        margin-top: 200px;
+    }
+   
+    #shoppingCart{
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+    }
+    .dropdownContentCategory{
+        width: 90% !important;
+        left: 5% !important;
+    }
+    .col2{
+        background: blue;
+    
+    }
+    #searchForm
+    {
+        display: block;
+    }
+    .productRecommendedPrice {
+        margin-left: 35%;
+    }
+    .productRecommendedPriceNew {
+        margin-left: 0 !important;
+    }
+    .addToCartButton{
+        margin-left: 35% !important;
+    }
+    .productBestsellerPrice{
+        margin-left: 35% !important;
+    }
+    .productBestsellerPriceNew{
+        margin-left: 0 !important;
+    }
+    .addToCartButtonBestseller{
+        margin-left: 35% !important;
+    }
+    .addToListWishesButtonBestseller{
+        margin-left: 0% !important;
+    }
+ }
+
+@media (min-width: 768px) and (max-width: 991px) { 
+    #whitePage{
+        margin-top: 250px;
+    }
+  
+    #shoppingCart{
+        margin-top: 0px;
+        display: block;
+        text-align: center;
+    }
+    
+    .dropdownContentCategory{
+        width: 70%;
+        left: 15%;
+    }
+    .col2{
+        background: yellow;
+    
+    }
+    #searchForm
+    {
+        display: block;
+    }
+    .productRecommended {
+        max-width: 23%;
+    }
+    .productRecommendedPrice {
+        margin-left: 25%;
+    }
+    .productRecommendedPriceNew {
+        margin-left: 45% !important;
+    }
+    .addToCartButton{
+        margin-left: 8% !important;
+    }
+    .productBestsellerPrice{
+        margin-left: 15% !important;
+    }
+    .productBestsellerPriceNew{
+        margin-left: 39% !important;
+    }
+    .addToCartButtonBestseller{
+        margin-left: 10% !important;
+    }
+    .addToListWishesButtonBestseller{
+        margin-left: 100% !important;
+    }
+ }
+
+
+@media (min-width: 992px) and (max-width: 1199px) { 
+    #whitePage{
+        margin-top: 300px;
+    }
+    .col2{
+        background: grey;
+    
+    }
+    #shoppingCart{
+        display: block;
+        text-align: left;
+    }
+
+    #searchForm{
+         display: flex;
+    }   
+    
+    .dropdownContentCategory{
+        width: 60% !important;
+        left: 20% !important;
+    }  
+    .productRecommended {
+        max-width: 23% !important;
+    }
+    .productRecommendedPrice {
+        margin-left: 25% !important;
+    }
+    .productRecommendedPriceNew {
+        margin-left: 0 !important;
+    }
+    .addToCartButton{
+        margin-left: 20% !important;
+    }
+
+    .productBestsellerPrice{
+        margin-left: 10% !important;
+    }
+    .productBestsellerPriceNew{
+        margin-left: 0 !important;
+    }
+    .addToCartButtonBestseller{
+        margin-left: 10% !important;
+    }
+    .addToListWishesButtonBestseller{
+        margin-left: 0% !important;
+    }
+ }
+
+
+@media (min-width: 1200px) { 
+    #whitePage{
+        margin-top: 400px;
+    }
+    .col2{
+        background: grey;
+    
+    }
+    #shoppingCart{
+        display: block;
+        text-align: left;
+    }
+
+    #searchForm{
+         display: flex;
+    }   
+    
+    .dropdownContentCategory{
+        width: 60% !important;
+        left: 20% !important;
+    }
+
+    .productRecommended {
+        max-width: 23% !important;
+    }
+    .productRecommendedPrice {
+        margin-left: 25% !important;
+    }
+    .productRecommendedPriceNew {
+        margin-left: 0 !important;
+    }
+
+    .addToCartButton{
+        margin-left: 20% !important;
+    }
+
+    .productBestsellerPrice{
+        margin-left: 15% !important;
+    }
+    .productBestsellerPriceNew{
+        margin-left: 0 !important;
+    }
+    .addToCartButtonBestseller{
+        margin-left: 15% !important;
+    }
+    .addToListWishesButtonBestseller{
+        margin-left: 0% !important;
+    }
+   
+ }
+
+
+
+
+
+
+.headerTop{
+    position: static;
+}
+.headerTop a{
+    color:grey; 
+    text-decoration: none;
+}
+#SignIn{
+    color:#B85450;
+    font-weight: 600;
+}
+h6{
+     
+    margin-top: 0px;
+    margin-bottom: 0px; 
+}
+hr{
+    height: 6px;
+    margin: 3px;
+}
+
+#navbarContent{
+    box-shadow: 3px 9px 38px -16px rgba(0,0,0,0.75);
+}
+#searchForm{
+    text-align: center;
+    padding: 0;
+    }    
+/*podswietlenie wyszukiwarki*/
+.mdl-textfield.is-focused .mdl-textfield__label::after {
+    background-color: #B85450 !important;
+}
+
+.dropdown-item:hover{
+    background-color:rgba(184, 84, 80, 0.705);
+}
+
+#searchButton{
+    background-color:#B85450;
+    height: 100%;
+    line-height: 32px;
+}
+
+#iconShoppingCart {
+    height: 30px;
+}
+
+#countShoppingCart {
+    font-size: 12px;
+    background-color: #B85450;
+}
+
+
+/*navbar scroll */
+.sticky.is-sticky {
+position: fixed;
+left: 0;
+right: 0;
+top: 0;
+z-index: 1000;
+width: 100%;
+}
+
+
+#myCarousel{
+  position: fixed;
+ z-index: 2;
+}
+
+#categories {
+    top: 100px;
+    text-align: center;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #B85450;
+    margin-left: 9px;
+    margin-right: 9px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    z-index: 2;
+}
+
+.category {
+    color: white;
+}
+
+#categories a:hover,
+#categories a:visited,
+#categories a:link,
+#categories a:active {
+    text-decoration: none;
+    
+}
+
+.dropdownCategory {
+    position: static;
+    display: inline-block;
+    text-align: center;
+}
+
+.dropdownCategory:hover .dropdownContentCategory {
+    display: block;
+}
+
+
+.dropdownContentCategory {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    margin-top: 0px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 4;
+    text-align: left;
+}
+
+.headerContentCategory {
+    font-size: 19px;
+    color: #B85450;
+    font-weight: 700;
+    text-align: center;
+}
+
+.listSubCategory {
+    list-style-type: none;
+    color: rgb(153, 153, 153);
+    text-align: left;
+
+}
+
+.subCategory {
+    color: grey;
+    font-size: 16px;
+
+}
+
+.subCategory:hover {
+    color: rgb(218, 88, 83);;
+}
+
+.subCategory-last {
+    padding-bottom: 5px;
+}
+
+/*produkty polecane*/
+#productsRecommended {
+    background-color: rgb(250, 250, 250);
+    padding-top: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5); 
+    z-index: 3;
+   
+}
+#whitePage{
+  z-index: 3;
+  position: relative;
+  background-color: white;
+}
+
+.productRecommended {
+    background-color: rgb(254, 254, 254);
+    padding: 0px;
+    margin: 1%;
+    border-style: none;
+    border-color: white;
+}
+.productRecommendedTitle {
+    margin-bottom: 10px;
+    margin-top: 15px;
+    font-size: 17px;
+    text-align: center;
+    color: grey;
+}
+
+.productRecommendedPrice {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+}
+
+.productRecommendedPriceNew {
+    color: rgb(218, 88, 83);
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.addToCartButton{
+    background-color: rgb(184, 84, 80) !important;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: 5px;
+   
+    text-transform: none;
+    border-radius: 12px;
+
+}
+.addToListWishesButton{
+    color: #595EB8;         
+    margin-top: 2px;  
+    min-width: 20px;
+    padding: 5px;
+    margin-left: 0px;
+    font-size: 37px;  
+}
+
+#textRecommended {
+    color: rgb(87, 87, 87);
+}
+
+
+/* bestsellery */
+#productsBestseller {
+    background-color: rgb(250, 250, 250);
+    padding: 0px;
+    border-style: none;
+    border-color: white;
+}
+
+#textBestseller {
+    color: grey;
+    margin-top: 15px;
+}
+
+.productBestseller {
+    background-color: rgb(254, 254, 254);
+    padding: 0px;
+    border-style: none;
+    border-color: white;
+    margin-left: 2.8%;
+    margin-bottom: 5px;
+}
+
+
+.productBestsellerTitle {
+margin-bottom: 10px;
+margin-top: 15px;
+font-size: 16px;
+text-align: center;
+color: grey;
+}
+
+.productBestsellerPrice {
+font-weight: 500;
+font-size: 15px;
+text-align: center;
+}
+
+.productBestsellerPriceNew {
+color: rgb(218, 88, 83);
+text-align: center;
+font-size: 17px;
+font-weight: 700;
+}
+.addToCartButtonBestseller{    
+background-color: rgb(184, 84, 80) !important;
+padding-top: 1px;
+padding-bottom: 1px;
+padding-left: 3px;
+padding-right: 3px;
+text-align: center;
+text-decoration: none;
+font-size: 13px;
+font-weight: 700;
+margin-top: 5px;
+text-transform: none;
+border-radius: 12px;
+
+
+}
+.addToListWishesButtonBestseller{
+color: #595EB8;         
+margin-top: 2px;
+margin-bottom: 5px;  
+min-width: 20px;
+padding: 5px;
+font-size: 34px;  
+}
+
+
+
+/*stopka*/
+.categoryFooter {
+    margin-top: 50px;
+    margin-bottom: 15px;
+    color: #B85450;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.footerLink {
+    color: grey;
+
+}
+
+.footerLink:hover {
+    color: grey;
+}
+
+.imgLogo {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}

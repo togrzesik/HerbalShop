@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="sklepModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ParentCategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Deliveries">
+    <Key>
+      <PropertyRef Name="DeliveryID" />
+    </Key>
+    <Property Name="DeliveryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PriceN" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="Vat" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ImageID" />
+    </Key>
+    <Property Name="ImageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Path" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="InvoicePath" Type="varchar" MaxLength="200" />
+    <Property Name="OrderPath" Type="varchar" MaxLength="200" />
+    <Property Name="PriceN" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="PriceB" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="WhoModified" Type="int" />
+    <Property Name="LastTimeModified" Type="datetime" />
+    <Property Name="DeliverStreet" Type="varchar" MaxLength="200" />
+    <Property Name="DeliverNumOfHouse" Type="varchar" MaxLength="6" />
+    <Property Name="DeliverPostCode" Type="varchar" MaxLength="6" />
+    <Property Name="DeliverCity" Type="varchar" MaxLength="50" />
+    <Property Name="NameDelivery" Type="varchar" MaxLength="50" />
+    <Property Name="PriceNDelivery" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="VATDelivery" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="NamePayment" Type="varchar" MaxLength="50" />
+    <Property Name="PriceNPayment" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="VatPayment" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Payments">
+    <Key>
+      <PropertyRef Name="PaymentID" />
+    </Key>
+    <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PriceN" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="VAT" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="CodeProduct" Type="varchar" MaxLength="200" />
+    <Property Name="OldPriceN" Type="decimal" Precision="8" Scale="2" />
+    <Property Name="PriceN" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="Specification" Type="varchar(max)" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Vat" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="Recommended" Type="bit" Nullable="false" />
+    <Property Name="IsShowed" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductsOfOrders">
+    <Key>
+      <PropertyRef Name="ProductOfOrder" />
+    </Key>
+    <Property Name="ProductOfOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="NumOfOrderID" Type="int" Nullable="false" />
+    <Property Name="PriceN" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+    <Property Name="Vat" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Scrapers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="XKomPrice" Type="varchar(max)" />
+    <Property Name="XKomLink" Type="varchar(max)" />
+    <Property Name="XKomLinkChecked" Type="varchar" MaxLength="250" />
+    <Property Name="VobisPrice" Type="varchar(max)" />
+    <Property Name="VobistLink" Type="varchar(max)" />
+    <Property Name="VobistLinkChecked" Type="varchar" MaxLength="250" />
+    <Property Name="AlsenPrice" Type="varchar(max)" />
+    <Property Name="AlsentLink" Type="varchar(max)" />
+    <Property Name="AlsentLinkChecked" Type="varchar" MaxLength="250" />
+    <Property Name="CeneoPrice" Type="varchar(max)" />
+    <Property Name="CeneoLink" Type="varchar(max)" />
+    <Property Name="CeneoLinkChecked" Type="varchar" MaxLength="250" />
+    <Property Name="DateLastUpdate" Type="datetime" />
+    <Property Name="DifferencePrice" Type="decimal" Precision="8" Scale="2" />
+  </EntityType>
+  <EntityType Name="Statuses">
+    <Key>
+      <PropertyRef Name="StatusID" />
+    </Key>
+    <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="64" Nullable="false" />
+    <Property Name="IsActive" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Surname" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneNumber" Type="int" />
+    <Property Name="Street" Type="varchar" MaxLength="200" />
+    <Property Name="NumOfHouse" Type="varchar" MaxLength="6" />
+    <Property Name="PostCode" Type="varchar" MaxLength="6" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Link" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_Categories_Categorides">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Categories1" Type="Self.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Categories1">
+        <PropertyRef Name="ParentCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Images" Type="Self.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Orders_Userss">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="WhoModified" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOfOrders_Orders">
+    <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+    <End Role="ProductsOfOrders" Type="Self.ProductsOfOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="ProductsOfOrders">
+        <PropertyRef Name="NumOfOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductsOfOrders_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductsOfOrders" Type="Self.ProductsOfOrders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductsOfOrders">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Scrapers_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="Scrapers" Type="Self.Scrapers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="Scrapers">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="sklepModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Deliveries" EntityType="Self.Deliveries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductsOfOrders" EntityType="Self.ProductsOfOrders" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Scrapers" EntityType="Self.Scrapers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Categories_Categorides" Association="Self.FK_Categories_Categorides">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Categories1" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Products" Association="Self.FK_Comments_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_Users" Association="Self.FK_Comments_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Products" Association="Self.FK_Images_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Users" Association="Self.FK_Orders_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Orders_Userss" Association="Self.FK_Orders_Userss">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Categories" Association="Self.FK_Products_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOfOrders_Orders" Association="Self.FK_ProductsOfOrders_Orders">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="ProductsOfOrders" EntitySet="ProductsOfOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductsOfOrders_Products" Association="Self.FK_ProductsOfOrders_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductsOfOrders" EntitySet="ProductsOfOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Scrapers_Products" Association="Self.FK_Scrapers_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Scrapers" EntitySet="Scrapers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

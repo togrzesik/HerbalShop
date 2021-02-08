@@ -1,0 +1,38 @@
+﻿@model Sklep.Models.ViewModel.Admin.MemoryRAMDetails
+
+
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Rodzaj pamięci:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.TypeOfMemory, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Rodzaj pamięci", @id = "TypeOfMemory" } })
+        <label class="mdl-textfield__label modal_label--underline" for="TypeOfMemory"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Pojemność:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Pojemność", @id = "Capacity" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Capacity"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Taktowanie:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Frequency, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Taktowanie", @id = "Frequuency" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Frequuency"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Opóźnienia:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.CycleLatency, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Opóźnienia", @id = "CycleLatency" } })
+        <label class="mdl-textfield__label modal_label--underline" for="CycleLatency"></label>
+    </div>
+</div>
+<div class="row">
+    <p class="admin_details_list_label admin_details_list_label--addDelivery col-5">Napięcie:</p>
+    <div class="mdl-textfield mdl-js-textfield col-6  form-inline">
+        @Html.EditorFor(model => model.Voltage, new { htmlAttributes = new { @class = "mdl-textfield__input modal_input add_productSpecification_input", @placeholder = "Napięcie", @id = "Voltage" } })
+        <label class="mdl-textfield__label modal_label--underline" for="Voltage"></label>
+    </div>
+</div>
